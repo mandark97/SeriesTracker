@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170408125444) do
+ActiveRecord::Schema.define(version: 20170409163947) do
 
   create_table "episodes", force: :cascade do |t|
     t.string   "imdb_id"
@@ -56,23 +56,22 @@ ActiveRecord::Schema.define(version: 20170408125444) do
     t.index ["uid"], name: "index_users_on_uid"
   end
 
-  create_table "watch_lists", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_watch_lists_on_user_id"
+  create_table "watched_episodes", force: :cascade do |t|
+    t.integer  "watched_tv_show_id"
+    t.integer  "episode_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["episode_id"], name: "index_watched_episodes_on_episode_id"
+    t.index ["watched_tv_show_id"], name: "index_watched_episodes_on_watched_tv_show_id"
   end
 
-  create_table "watch_statuses", force: :cascade do |t|
-    t.integer  "episode_id"
-    t.integer  "watch_list_id"
-    t.boolean  "status"
-    t.string   "tvshow_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["episode_id"], name: "index_watch_statuses_on_episode_id"
-    t.index ["watch_list_id"], name: "index_watch_statuses_on_watch_list_id"
+  create_table "watched_tv_shows", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "tvshow_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tvshow_id"], name: "index_watched_tv_shows_on_tvshow_id"
+    t.index ["user_id"], name: "index_watched_tv_shows_on_user_id"
   end
 
 end
