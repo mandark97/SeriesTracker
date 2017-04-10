@@ -3,32 +3,94 @@
 <head>
   <title>Series Tracker</title>
   <%= csrf_meta_tags %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- bootstrap css -->
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </head>
 
 <body>
-<header></header>
-<div class="menu-bar">
-  <ul>
-    <li><a>Main</a></li>
-    <li><a>drop1</a>
-      <ul>
-        <li>drop1.1</li>
-        <li>drop1.2</li>
-      </ul>
-    </li>
-    <li>drop2
-      <ul>
-        <li>drop2.1</li>
-        <li>drop2.2</li>
-      </ul>
-    </li>
-  </ul>
-</div>
-<main>
-  <%= yield %>
-</main>
+<!-- HEADER -->
+<header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header">
+  <i class="fa fa-bars"></i>
+</header>
+<!-- END HEADER -->
 
+<!-- NAVIGATION SIDEBAR -->
+<div class="sidebar-wrapper col-lg-3 col-md-3 col-sm-12 col-xs-12">
+  <div class="sidebar-header">
+    <span class="title">Series Tracker</span>
+    <i class="fa fa-times fa-2x"></i>
+  </div>
+  <!-- USER PROFILE -->
+  <div>
+    <div class="sidebar-userprofile">
+      <!-- CUSTOM USER PROFILE BACKGROUND -->
+      <div class="background">
+      </div>
+
+      <!-- CUSTOM USER PROFILE AVATAR -->
+      <div class="avatar">
+        <%= image_tag "default-profile-picture.jpg" %>
+      </div>
+      <!-- USER PROFILE MESAAGE -->
+      <div class="message">
+        Hi, UserName!
+      </div>
+    </div>
+  </div>
+  <!-- END USER PROFILE -->
+
+  <!-- SIDEBAR MENU -->
+  <div class="sidebar-menu">
+    <ul class="nav">
+      <!-- LINK TO HOME PAGE -->
+      <li class="active">
+        <a href="#">
+          <i class="glyphicon glyphicon-home"></i>
+          Home </a>
+      </li>
+      <!-- LINK TO MY ACCOUNT PAGE -->
+      <li>
+        <a href="#">
+          <i class="glyphicon glyphicon-user"></i>
+          My Account</a>
+      </li>
+      <!-- LINK TO USER'S WATCHLIST -->
+      <li>
+        <a href="#" target="_blank">
+          <i class="glyphicon glyphicon-eye-open"></i>
+          Watchlist </a>
+      </li>
+      <!-- LINK TO USER'S FINISHED TVSHOWS -->
+      <li>
+        <a href="#">
+          <i class="glyphicon glyphicon-ok"></i>
+          Finished TVshows </a>
+      </li>
+    </ul>
+  </div>
+  <!-- END SIDEBAR MENU -->
+</div>
+<!-- END NAVIGATION SIDEBAR -->
+
+<!-- PAGE CONTENT -->
+<main class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-content">
+
+</main>
+<!-- END PAGE CONTENT -->
+
+<!-- SCRIPTS -->
+<!-- jquery-->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
+<!-- js bootstrap -->
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- font awesome -->
+<script src="https://use.fontawesome.com/7bb929f83a.js"></script>
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+<!-- END SCRIPTS ->
 </body>
 </html>
