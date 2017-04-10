@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Untitled</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>Series Tracker</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-  <body>
-    <%= yield %>
-  </body>
+<body>
+<header></header>
+<div class="menu-bar">
+  <ul>
+    <li><a>Main</a></li>
+    <li><a>drop1</a>
+      <ul>
+        <li>drop1.1</li>
+        <li>drop1.2</li>
+      </ul>
+    </li>
+    <li>drop2
+      <ul>
+        <li>drop2.1</li>
+        <li>drop2.2</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+<main>
+  <% if current_user %>
+      <p>Signed in as <%= current_user.name %></p>
+      <%= link_to 'Log Out', logout_path, method: :delete %>
+  <% else %>
+      <%= link_to 'Log in with Twitter', '/auth/twitter' %>
+  <% end %>
+  <%= yield %>
+</main>
+</body>
 </html>

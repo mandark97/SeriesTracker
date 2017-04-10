@@ -114,3 +114,4 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+config/secrets.yml
