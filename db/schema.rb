@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409163947) do
+ActiveRecord::Schema.define(version: 20170410112405) do
 
   create_table "episodes", force: :cascade do |t|
     t.string   "imdb_id"
@@ -51,8 +51,10 @@ ActiveRecord::Schema.define(version: 20170409163947) do
     t.string   "name"
     t.string   "token"
     t.string   "secret"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "provider"
+    t.string   "profile_image"
     t.index ["uid"], name: "index_users_on_uid"
   end
 
