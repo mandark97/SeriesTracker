@@ -55,3 +55,5 @@ gem 'rspec-rails'
 gem 'rubocop'
 gem 'mysql2'
 gem 'pry'
+gem 'omniauth-twitter', '~> 1.1.0'
+
