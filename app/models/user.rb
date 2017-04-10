@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  has_many :watched_tv_shows
+  has_many :tvshows, through: :followed_tvshows
 end
