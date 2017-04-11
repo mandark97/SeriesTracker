@@ -38,7 +38,11 @@
       </div>
       <!-- USER PROFILE MESAAGE -->
       <div class="message">
+        <% if current_user %>
+      Hi, <%= current_user.name %>
+        <%else%>
         Hi, UserName!
+        <%end%>
       </div>
     </div>
   </div>
@@ -76,7 +80,6 @@
   <!-- END SIDEBAR MENU -->
 </div>
 <!-- END NAVIGATION SIDEBAR -->
-
 <!-- PAGE CONTENT -->
 <main class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-content">
 
@@ -92,5 +95,6 @@
 <script src="https://use.fontawesome.com/7bb929f83a.js"></script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 <!-- END SCRIPTS ->
+
 </body>
 </html>
