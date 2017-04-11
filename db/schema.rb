@@ -70,9 +70,28 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.string   "name"
     t.string   "token"
     t.string   "secret"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "profile_image"
+    t.index ["uid"], name: "index_users_on_uid", using: :btree
+  end
+
+  create_table "watched_episodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "watched_tv_show_id"
+    t.integer  "episode_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["episode_id"], name: "index_watched_episodes_on_episode_id", using: :btree
+    t.index ["watched_tv_show_id"], name: "index_watched_episodes_on_watched_tv_show_id", using: :btree
+  end
+
+  create_table "watched_tv_shows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "tvshow_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["uid"], name: "index_users_on_uid", using: :btree
+    t.index ["tvshow_id"], name: "index_watched_tv_shows_on_tvshow_id", using: :btree
+    t.index ["user_id"], name: "index_watched_tv_shows_on_user_id", using: :btree
   end
 
   add_foreign_key "episodes", "followed_episodes", column: "followed_episodes_id"
