@@ -34,7 +34,11 @@
 
       <!-- CUSTOM USER PROFILE AVATAR -->
       <div class="avatar">
-        <%= image_tag current_user.profile_image %>
+        <% if current_user %>
+            <%= image_tag current_user.profile_image %>
+        <% else %>
+            <%= image_tag "default-profile-picture.jpg" %>
+        <% end %>
       </div>
       <!-- USER PROFILE MESAAGE -->
       <div class="message">
@@ -82,7 +86,7 @@
 <!-- END NAVIGATION SIDEBAR -->
 <!-- PAGE CONTENT -->
 <main class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-content">
-<%=yield%>
+<%= yield %>
 </main>
 <!-- END PAGE CONTENT -->
 

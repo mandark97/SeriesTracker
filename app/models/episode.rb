@@ -1,6 +1,6 @@
 class Episode < ApplicationRecord
   belongs_to :tvshow
-  belongs_to :followed_episode
+  has_many :followed_episodes
   validates :imdb_id, uniqueness: true
 
 end

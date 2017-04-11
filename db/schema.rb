@@ -18,20 +18,20 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.string   "title"
     t.date     "released"
     t.integer  "episode"
-    t.float    "imdb_rating",          limit: 24
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
-    t.integer  "followed_episodes_id"
-    t.index ["followed_episodes_id"], name: "index_episodes_on_followed_episodes_id", using: :btree
+    t.float    "imdb_rating", limit: 24
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.index ["imdb_id"], name: "index_episodes_on_imdb_id", using: :btree
     t.index ["tvshow_id"], name: "index_episodes_on_tvshow_id", using: :btree
   end
 
   create_table "followed_episodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "followed_tvshow_id"
+    t.integer  "episodes_id"
     t.boolean  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.index ["episodes_id"], name: "index_followed_episodes_on_episodes_id", using: :btree
     t.index ["followed_tvshow_id"], name: "index_followed_episodes_on_followed_tvshow_id", using: :btree
   end
 
@@ -76,25 +76,7 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
-  create_table "watched_episodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "watched_tv_show_id"
-    t.integer  "episode_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["episode_id"], name: "index_watched_episodes_on_episode_id", using: :btree
-    t.index ["watched_tv_show_id"], name: "index_watched_episodes_on_watched_tv_show_id", using: :btree
-  end
-
-  create_table "watched_tv_shows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.integer  "tvshow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["tvshow_id"], name: "index_watched_tv_shows_on_tvshow_id", using: :btree
-    t.index ["user_id"], name: "index_watched_tv_shows_on_user_id", using: :btree
-  end
-
-  add_foreign_key "episodes", "followed_episodes", column: "followed_episodes_id"
+  add_foreign_key "followed_episodes", "episodes", column: "episodes_id"
   add_foreign_key "followed_episodes", "followed_tvshows"
   add_foreign_key "followed_tvshows", "tvshows"
   add_foreign_key "followed_tvshows", "users"
