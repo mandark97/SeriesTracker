@@ -1,12 +1,17 @@
 class TvshowManagerController < ApplicationController
   before_action :logged, only: :follow
+  include TvshowManagerHelper
   def index
     @tv=Tvshow.add_or_create_by_title('The Flash')
 
   end
   def show
-    @response = OMDB.client.search(params[:title])
-    puts @response
+    @answer = OMDB.client.search(params[:title])
+
+    if answer_test(@answer) == false
+      redirect_to root_path
+    end
+
   end
   def follow
     serial=Tvshow.add_or_create(params[:imdb_id])

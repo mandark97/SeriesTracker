@@ -1,5 +1,5 @@
 class FrontendController < ApplicationController
-  TV_SHOW_REMOVAL = [:type, :language, :response, :country, :awards, :metascore]
+  TV_SHOW_REMOVAL = [:type, :language, :answer, :country, :awards, :metascore]
   def index
     require 'omdbapi'
     gameofthrones=OMDB.title('Game of thrones')

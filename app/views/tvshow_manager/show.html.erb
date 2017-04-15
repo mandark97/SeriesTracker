@@ -1,6 +1,10 @@
-<% @response.each do |x| %>
-<tr>
-  <td><%= link_to image_tag(x.poster),controller: 'tvshow_manager', action: 'follow', imdb_id: x.imdb_id%></td><br>
-</tr>
-
+<% if @answer.is_a? Array %>
+    <% @answer.each do |x| %>
+        <tr>
+          <td><%= link_to(image_tag(x.poster), controller: 'tvshow_manager', action: 'follow', imdb_id: x.imdb_id) %></td>
+          <br>
+        </tr>
+    <% end %>
+<% else %>
+    <%= link_to(image_tag(@answer.poster), controller: 'tvshow_manager', action: 'follow', imdb_id: @answer.imdb_id) %>
 <% end %>
