@@ -1,30 +1,31 @@
 class Tvshow < ApplicationRecord
   has_many :episodes
+  has_many :followed_tvshows
   has_many :users, through: :followed_tvshows
   validates :imdb_id, uniqueness: true
 
-  KEYS = [:type]
+  KEYS = [:type, :language, :response, :country, :awards, :metascore]
   def self.add_or_create(imdb_id)
     require 'omdbapi'
-    unless Tvshow.all.find_by(imdb_id)
+    unless (ret=Tvshow.all.find_by(imdb_id: imdb_id))
       tvshow = OMDB.id(imdb_id)
-      common_create(tvshow)
+      ret=common_create(tvshow)
     end
-
-    @tvshow.save
+    ret
   end
 
   def self.add_or_create_by_title(title)
     require 'omdbapi'
-    unless Tvshow.all.find_by(title)
+    ret =nil
+    unless (ret=Tvshow.all.find_by(title: title))
       tvshow = OMDB.client.title(title)
-      common_create(tvshow)
+      ret=common_create(tvshow)
     end
+    ret
 
-    @tvshow.save
   end
 
   def self.common_create(tvshow)
-    @tvshow = Tvshow.create(tvshow.except(*KEYS))
+    return Tvshow.create(tvshow.except(*KEYS))
   end
 end

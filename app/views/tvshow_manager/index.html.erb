@@ -1,0 +1,6 @@
+<%= link_to 'auth/twitter' %>
+<%= form_tag('/show', method: :get) do %>
+    <%= text_field_tag :title %>
+    <%= submit_tag 'Search' %>
+<% end %>
+<%= @tv.title %>
