@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(version: 20170410190624) do
 
   create_table "followed_episodes", force: :cascade do |t|
     t.integer  "followed_tvshow_id"
-    t.integer  "episodes_id"
+    t.integer  "episode_id"
     t.boolean  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["episodes_id"], name: "index_followed_episodes_on_episodes_id", using: :btree
+    t.index ["episode_id"], name: "index_followed_episodes_on_episode_id", using: :btree
     t.index ["followed_tvshow_id"], name: "index_followed_episodes_on_followed_tvshow_id", using: :btree
   end
 
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
-  add_foreign_key "followed_episodes", "episodes", column: "episodes_id"
+  add_foreign_key "followed_episodes", "episodes"
   add_foreign_key "followed_episodes", "followed_tvshows"
   add_foreign_key "followed_tvshows", "tvshows"
   add_foreign_key "followed_tvshows", "users"

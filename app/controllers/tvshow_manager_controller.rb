@@ -15,7 +15,11 @@ class TvshowManagerController < ApplicationController
   end
   def follow
     serial=Tvshow.add_or_create(params[:imdb_id])
-    current_user.tvshows << serial
+    begin
+      current_user.tvshows << serial
+    rescue
+      puts 'w/e'
+    end
     @shows=current_user.tvshows
   end
 
