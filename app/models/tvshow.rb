@@ -4,7 +4,7 @@ class Tvshow < ApplicationRecord
   has_many :users, through: :followed_tvshows
   validates :imdb_id, uniqueness: true
 
-  KEYS = [:type, :language, :answer, :country, :awards, :metascore]
+  KEYS = [:type, :language, :answer, :country, :awards, :metascore, :response]
   def self.add_or_create(imdb_id)
     unless (ret=Tvshow.all.find_by(imdb_id: imdb_id))
       tvshow = OMDB.id(imdb_id)
@@ -14,7 +14,6 @@ class Tvshow < ApplicationRecord
   end
 
   def self.add_or_create_by_title(title)
-    ret =nil
     unless (ret=Tvshow.all.find_by(title: title))
       tvshow = OMDB.client.title(title)
       ret=common_create(tvshow)

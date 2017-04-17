@@ -6,7 +6,7 @@ class FrontendController < ApplicationController
     test=Tvshow.create(gameofthrones.except(*TV_SHOW_REMOVAL))
     @count=0
     for i in 1..gameofthrones.total_seasons.to_i
-      ceva=OMDB.title(gameofthrones.imdb_id,{:season => i.to_s})
+      ceva=OMDB.title(gameofthrones.imdb_id, {:season => i.to_s})
       ceva.episodes.each do |x|
         x[:tvshow_id]=test.id
         ep1=Episode.create(x)
