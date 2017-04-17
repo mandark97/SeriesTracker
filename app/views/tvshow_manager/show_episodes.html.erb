@@ -1,0 +1,5 @@
+<% @episodes.each do |x| %>
+    <tr>
+      <td><%=link_to x.title, action: :mark_episode, ep: x.id %></td><br>
+    </tr>
+<% end %>
