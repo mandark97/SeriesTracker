@@ -10,13 +10,13 @@
 #   http://dev.mysql.com/doc/refman/5.7/en/old-client.html
 #
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8
   pool: 5
-  username: root
+  username: postgres
   password: root
   host: localhost
-  port: 3306
+  port: 5432
 
 development:
   <<: *default

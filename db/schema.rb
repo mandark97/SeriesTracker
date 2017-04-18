@@ -12,30 +12,33 @@
 
 ActiveRecord::Schema.define(version: 20170410190624) do
 
-  create_table "episodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "episodes", force: :cascade do |t|
     t.integer  "tvshow_id"
     t.string   "imdb_id"
     t.string   "title"
     t.date     "released"
     t.integer  "episode"
-    t.float    "imdb_rating", limit: 24
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.float    "imdb_rating"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.index ["imdb_id"], name: "index_episodes_on_imdb_id", using: :btree
     t.index ["tvshow_id"], name: "index_episodes_on_tvshow_id", using: :btree
   end
 
-  create_table "followed_episodes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "followed_episodes", force: :cascade do |t|
     t.integer  "followed_tvshow_id"
-    t.integer  "episodes_id"
+    t.integer  "episode_id"
     t.boolean  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["episodes_id"], name: "index_followed_episodes_on_episodes_id", using: :btree
+    t.index ["episode_id"], name: "index_followed_episodes_on_episode_id", using: :btree
     t.index ["followed_tvshow_id"], name: "index_followed_episodes_on_followed_tvshow_id", using: :btree
   end
 
-  create_table "followed_tvshows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "followed_tvshows", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "tvshow_id"
     t.datetime "created_at", null: false
@@ -44,7 +47,7 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.index ["user_id"], name: "index_followed_tvshows_on_user_id", using: :btree
   end
 
-  create_table "tvshows", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "tvshows", force: :cascade do |t|
     t.string   "imdb_id"
     t.string   "title"
     t.integer  "year"
@@ -55,17 +58,17 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.string   "director"
     t.string   "writer"
     t.string   "actors"
-    t.text     "plot",          limit: 65535
+    t.text     "plot"
     t.string   "poster"
-    t.float    "imdb_rating",   limit: 24
+    t.float    "imdb_rating"
     t.integer  "imdb_votes"
     t.integer  "total_seasons"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.index ["imdb_id"], name: "index_tvshows_on_imdb_id", using: :btree
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "uid"
     t.string   "name"
     t.string   "token"
@@ -76,7 +79,7 @@ ActiveRecord::Schema.define(version: 20170410190624) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
-  add_foreign_key "followed_episodes", "episodes", column: "episodes_id"
+  add_foreign_key "followed_episodes", "episodes"
   add_foreign_key "followed_episodes", "followed_tvshows"
   add_foreign_key "followed_tvshows", "tvshows"
   add_foreign_key "followed_tvshows", "users"
