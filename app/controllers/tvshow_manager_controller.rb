@@ -51,8 +51,7 @@ class TvshowManagerController < ApplicationController
     puts episode
     begin
 
-      current_user.followed_tvshows.find(episode.tvshow_id).episodes << episode
-
+      current_user.followed_tvshows.find_by(tvshow_id: episode.tvshow_id).episodes << episode
     rescue
       puts 'magie'
     end
