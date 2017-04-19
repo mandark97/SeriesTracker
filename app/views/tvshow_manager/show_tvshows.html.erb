@@ -1,0 +1,5 @@
+<% @shows.each do |x| %>
+    <tr>
+      <td><%=link_to x.title, action: 'show_episodes', id: x.id%></td>
+    </tr>
+<% end %>
