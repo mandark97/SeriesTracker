@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
-  get 'tweets/index'
-
-  get 'tweets/show'
-
-  get 'tweets/new'
-
-  get 'tweets/edit'
+  match 'tweets' => 'tweets#index', via: [:get, :post]
+  match 'tweets/index' => 'tweets#index', via: [:get, :post]
+  match 'tweets/show' => 'tweets#show', via: [:get, :post]
+  match 'tweets/new' => 'tweets#new', via: [:get, :post]
+  match 'tweets/edit' => 'tweets#edit', via: [:get, :post]
 
   get '/auth/:provider/callback', to: 'sessions#create'
 

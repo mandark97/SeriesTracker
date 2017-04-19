@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :followed_tvshows
   has_many :tvshows, through: :followed_tvshows
+  #has_many :tweets
   def self.find_or_create_from_auth_hash(auth_hash)
     user = where(uid: auth_hash.uid).first_or_create
     user.update(

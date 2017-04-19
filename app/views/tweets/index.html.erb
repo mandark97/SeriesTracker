@@ -2,6 +2,13 @@
 
 <h1>Listing Tweets</h1>
 
+<div class="container">
+  <h2>Basic Panel</h2>
+  <div class="panel panel-default">
+    <div class="panel-body">A Basic Panel Created Using Bootstrap :P</div>
+  </div>
+</div>
+
 <table>
   <thead>
   <tr>
@@ -17,7 +24,7 @@
         <td><%= tweet.user_id %></td>
         <td><%= tweet.body %></td>
         <td><%= link_to 'Show', tweet %></td>
-        <td><%= link_to 'Edit', tweets_edit_path(tweet) %></td>
+        <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
         <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
