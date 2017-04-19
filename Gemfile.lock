@@ -78,7 +78,6 @@ GEM
     minitest (5.10.1)
     multi_json (1.12.1)
     multi_xml (0.6.0)
-    mysql2 (0.4.5-x86-mingw32)
     nio4r (2.0.0)
     nokogiri (1.7.1-x86-mingw32)
       mini_portile2 (~> 2.1.0)
@@ -189,7 +188,6 @@ DEPENDENCIES
   httparty
   jbuilder (~> 2.5)
   jquery-rails
-  mysql2
   omniauth-twitter (~> 1.1.0)
   pg
   pry
