@@ -195,7 +195,7 @@ DEPENDENCIES
   pry
   puma (~> 3.0)
   rails (~> 5.0.2)
-  rspec-rails
+  rspec-rails (~> 3.5)
   sass-rails (~> 5.0)
   sqlite3
   turbolinks (~> 5)
