@@ -1,11 +1,11 @@
+# documentation
 class TvshowManagerController < ApplicationController
   before_action :logged, only: :follow
   include TvshowManagerHelper
   require 'omdbapi'
 
   def index
-    #@tv=Tvshow.add_or_create_by_title('The Flash')
-
+    # @tv=Tvshow.add_or_create_by_title('The Flash')
   end
 
   def show
@@ -13,7 +13,6 @@ class TvshowManagerController < ApplicationController
     if !answer_test(@answer)
       redirect_to root_path
     end
-
   end
 
   def follow
@@ -30,12 +29,12 @@ class TvshowManagerController < ApplicationController
         end
       end
     end
+
     begin
       current_user.tvshows << serial
     rescue
       puts 'w/e'
     end
-
     redirect_to action: 'show_tvshows'
   end
 
@@ -61,7 +60,7 @@ class TvshowManagerController < ApplicationController
   end
 
   def logged
-    if current_user == nil
+    if current_user == nil?
       redirect_to root_path
     end
   end
