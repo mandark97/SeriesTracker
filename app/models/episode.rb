@@ -3,5 +3,4 @@ class Episode < ApplicationRecord
   has_many :followed_episodes
   has_many :followed_tvshows, through: :followed_episodes
   validates :imdb_id, uniqueness: true
-
 end

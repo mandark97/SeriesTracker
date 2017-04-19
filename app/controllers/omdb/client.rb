@@ -1,13 +1,10 @@
 module OMDB
-
   # Client for handling requests to the omdbapi.com API.
   #
   # @see http://omdbapi.com
   class Client
-
     include HTTParty
     base_uri OMDB::Default::API_ENDPOINT
-
     # Retrieves a movie or show based on its title.
     #
     # @param title [String] The title of the movie or show.
@@ -45,8 +42,8 @@ module OMDB
     # @return [Array, Hash]
     # @example
     #   OMDB.find('Star Wars')
-    def search(title, options={})
-      options.merge!(s: title,type: 'series')
+    def search(title, options = {})
+      options.merge!(s: title, type: 'series')
       params = build_params(options)
       results = get '/', params
       if results[:search]
@@ -60,20 +57,18 @@ module OMDB
 
     alias_method :find, :search
 
-    private
-
     # Performs a method on all hash keys.
     #
     # @param value [Array, Hash, Object]
     # @return [Array, Hash, Object]
-    def convert_hash_keys(value)
+    private def convert_hash_keys(value)
       case value
-        when Array
-          value.map {|v| convert_hash_keys(v)}
-        when Hash
-          Hash[value.map {|k, v| [k.to_snake_case.to_sym, convert_hash_keys(v)]}]
-        else
-          value
+      when Array
+        value.map { |v| convert_hash_keys(v) }
+      when Hash
+        Hash[value.map { |k, v| [k.to_snake_case.to_sym, convert_hash_keys(v)] }]
+      else
+        value
       end
     end
 
@@ -102,7 +97,7 @@ module OMDB
     # @return [Hash] The response from the get request.
     # @example
     #   get '/users', { username: 'caseyscarborough' }
-    def get(url, params={})
+    def get(url, params = {})
       request = self.class.get '/', query: params
       convert_hash_keys(request.parsed_response)
     end

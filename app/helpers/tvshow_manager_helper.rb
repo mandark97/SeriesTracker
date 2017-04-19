@@ -1,9 +1,9 @@
 module TvshowManagerHelper
   def answer_test(answer)
-    if answer.is_a? Hash and answer[:response] == 'False'
-      return false
+    if (answer.is_a? Hash) && (answer[:response] == 'False') then
+      false
     else
-      return true
+      true
     end
   end
 end
