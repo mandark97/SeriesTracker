@@ -1,5 +1,11 @@
 class TweetsController < ApplicationController
 
+  # Not secure, but whatever. You'll get this error
+  # "SSL_connect returned=1 errno=0 state=SSLv3 read server certificate
+  # B: certificate verify failed" if you detele the following two lines
+  require 'openssl'
+  OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
+
   before_action :set_tweet, only: [:show, :edit, :update, :destroy]
   respond_to :html
 

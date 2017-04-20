@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
-  match 'tweets' => 'tweets#index', via: [:get, :post]
-  match 'tweets/index' => 'tweets#index', via: [:get, :post]
-  match 'tweets/show' => 'tweets#show', via: [:get, :post]
-  match 'tweets/new' => 'tweets#new', via: [:get, :post]
-  match 'tweets/edit' => 'tweets#edit', via: [:get, :post]
 
   get '/auth/:provider/callback', to: 'sessions#create'
+
+  resources :tweets
+  # creates the following paths:
+      # tweets ~ tweets#index
+      # new_tweet ~ tweets#new
+      # edit_tweet ~ tweets#edit
+      # etc.
 
   root to: 'tvshow_manager#index'
   get 'tvshow_manager/show_tvshows'
