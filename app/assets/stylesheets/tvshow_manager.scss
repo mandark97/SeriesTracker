@@ -1,3 +1,51 @@
-// Place all the styles related to the TvshowManager controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.search-bar {
+  margin: 10px auto;
+  z-index: 0;
+}
+
+.tvshow-image {
+  width: 100%;
+}
+
+table.tvshow-info td {
+  padding: 5px;
+}
+
+table.tvshow-info td.attribute {
+  color: #337ab7;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  line-height: normal;
+  font-size: medium;
+}
+
+table.tvshow-info td.value {
+  font-family: 'Arimo', sans-serif;
+  line-height: normal;
+  font-size: medium;
+}
+
+.tvshow-title {
+  font-family: 'Arvo', serif;
+  margin: 0;
+  padding-left: 15px;
+  padding-bottom: 5px;
+}
+
+.tvshow {
+  background-color: white;
+  padding: 10px 10px 10px 0;
+  border: solid white 1px;
+  border-radius: 5px;
+
+}
+
+button.add-tvshow {
+  float:right;
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+button.add-tvshow > span {
+  padding-left: 5px;
+}

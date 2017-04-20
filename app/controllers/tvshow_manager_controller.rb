@@ -9,9 +9,25 @@ class TvshowManagerController < ApplicationController
   end
 
   def show
-    @answer = OMDB.client.search(params[:title])
-    if !answer_test(@answer)
-      redirect_to root_path
+    answer = OMDB.client.search(params[:title])
+    @tvshows_list = []
+
+    if !answer_test(answer)
+      @message = {
+          'text': 'No results found',
+          'type': 'alert-info'
+      }
+    else
+      if params[:message_text]
+        @message = {
+            'text': params[:message_text],
+            'type': params[:message_type]
+        }
+      end
+      for tvshow in answer
+        tvshow_answer = OMDB.client.id(tvshow.imdb_id)
+        @tvshows_list.push(tvshow_answer)
+      end
     end
   end
 
@@ -33,9 +49,17 @@ class TvshowManagerController < ApplicationController
     begin
       current_user.tvshows << serial
     rescue
-      puts 'w/e'
+      redirect_to action: 'show',
+                  title: serial.title,
+                  message_text: "An error occured while adding #{ serial.title } to your Watchlist",
+                  message_type: "alert-danger"
+      return
     end
-    redirect_to action: 'show_tvshows'
+
+    redirect_to action: 'show',
+                title: serial.title,
+                message_text: "#{ serial.title } was added successfully to your Watchlist",
+                message_type: "alert-success"
   end
 
   def show_tvshows

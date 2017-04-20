@@ -1,6 +1,70 @@
-<% @answer.each do |x| %>
-    <tr>
-      <td><%= link_to(image_tag(x.poster), controller: 'tvshow_manager', action: 'follow', imdb_id: x.imdb_id) %></td>
-      <br>
-    </tr>
+<form class="input-group col-lg-9 search-bar" action=<%= show_path %>>
+  <input type="text" class="form-control" placeholder="Search for..." name="title">
+  <span class="input-group-btn">
+    <button class="btn btn-primary" type="submit">Go!</button>
+  </span>
+</form>
+
+<% if @message %>
+    <div class="alert <%= @message.type %>" role="alert"><%= @message.text %></div>
+<% end %>
+
+<% @tvshows_list.each do |tvshow| %>
+    <div class="media tvshow">
+      <h2 class="tvshow-title"><%= tvshow.title%></h2>
+      <div class="media-left col-lg-3">
+        <% if tvshow.poster == 'N/A' %>
+            <img class="media-object tvshow-image" src=<%= image_path('default-poster.png')%> alt="tvshow-image">
+        <% else  %>
+            <img class="media-object tvshow-image" src=<%= tvshow.poster %> alt="tvshow-image">
+        <% end %>
+      </div>
+      <div class="media-body">
+        <table class="tvshow-info">
+          <tr>
+            <td class="attribute">Year: </td>
+            <td class="value"><%= tvshow.year %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Rated: </td>
+            <td class="value"><%= tvshow.rated %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Released: </td>
+            <td class="value"><%= tvshow.released %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Runtime: </td>
+            <td class="value"><%= tvshow.runtime %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Genre: </td>
+            <td class="value"><%= tvshow.genre %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Director: </td>
+            <td class="value"><%= tvshow.director %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Writers: </td>
+            <td class="value"><%= tvshow.writer %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Actors: </td>
+            <td class="value"><%= tvshow.actors %></td>
+          </tr>
+          <tr>
+            <td class="attribute">Plot: </td>
+            <td class="value"><%= tvshow.plot %></td>
+          </tr>
+        </table>
+
+        <a href=<%= tvshow_manager_follow_path imdb_id: tvshow.imdb_id  %>>
+               <button type="button" class="btn btn-success add-tvshow">Add to Watchlist
+                  <span class="glyphicon glyphicon-plus"></span>
+               </button>
+        </a>
+      </div>
+    </div>
+
 <% end %>
