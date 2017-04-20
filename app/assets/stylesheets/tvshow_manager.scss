@@ -49,3 +49,61 @@ button.add-tvshow {
 button.add-tvshow > span {
   padding-left: 5px;
 }
+
+.tvshow-card  h4.tvshow-title {
+  margin: 0 auto;
+  text-align: center;
+  color: #337ab7;
+  font-family: 'Arvo', serif;
+
+}
+
+.tvshow-card:hover {
+  border-color: #337ab7;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(51, 122, 183, 0.5);
+  background-color: #e7ecfc;
+
+}
+
+.tvshow-card .tvshow-poster {
+  width: 100%;
+}
+
+@media (max-width: 991px) {
+  .tvshow-card  h4.tvshow-title {
+    font-size: 2em;
+  }
+
+  table.tvshow-info td {
+    font-size: 1.4em !important;
+  }
+}
+
+.tvshow-container {
+  display: inline;
+  float: left;
+}
+
+/* for large devices - watchlist(4 columns) */
+@media (min-width: 1200px) {
+  .tvshow-container:nth-child(4n+1) {
+    clear: left;
+  }
+}
+
+/* for medium devices - watchlist(3 columns) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .tvshow-container:nth-child(3n+1) {
+    clear: left;
+  }
+}
+
+/* for tables - watchlist (2 columns) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .tvshow-container:nth-child(2n+1) {
+    clear: left;
+
+  }
+}
+
+

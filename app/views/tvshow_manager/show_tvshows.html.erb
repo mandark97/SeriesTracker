@@ -1,5 +1,16 @@
-<% @shows.each do |x| %>
-    <tr>
-      <td><%=link_to x.title, action: 'show_episodes', id: x.id%></td>
-    </tr>
+<% @shows.each do |tvshow| %>
+  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-container">
+    <a href=<%= tvshow_manager_show_episodes_path id: tvshow.id %>>
+    <div class="thumbnail tvshow-card">
+      <% if tvshow.poster == 'N/A' %>
+          <img class="tvshow-poster" src="<%= image_path('default-poster.png')%>" alt="tvshow-image">
+      <% else  %>
+          <img class="tvshow-poster" src="<%= tvshow.poster %>" alt="tvshow-image">
+      <% end %>
+      <div class="caption">
+        <h4 class="tvshow-title"><%= tvshow.title %> (<%= tvshow.year %>)</h4>
+      </div>
+    </div>
+    </a>
+  </div>
 <% end %>
