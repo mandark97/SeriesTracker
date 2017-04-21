@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  root to: 'tvshow_manager#index'
+  root to: 'tvshow_manager#index', as: 'index'
+  get 'tvshow_manager/search', as: 'search'
+  get 'tvshow_manager/add_watchlist/:imdb_id', to: 'tvshow_manager#add_watchlist', as: 'add_watchlist'
+  get 'tvshow_manager/show_watchlist', as: 'show_watchlist'
+  get 'tvshow_manager/tvshow/:id', to: 'tvshow_manager#tvshow_details', as: 'tvshow_details'
+  get 'tvshow_manager/mark_episode/:id', to: 'tvshow_manager#mark_episode', as: 'mark_episode'
 
-  get 'tvshow_manager/show_tvshows'
-  get 'tvshow_manager/show_episodes'
-  get 'tvshow_manager/mark_episode'
-  get '/show', to: 'tvshow_manager#show'
-  get 'tvshow_manager/follow'
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
 

@@ -1,0 +1,77 @@
+<div class="media tvshow-details">
+  <h2 class="tvshow-title"><%= @tvshow.title%></h2>
+  <div class="media-left col-lg-3">
+    <% if @tvshow.poster == 'N/A' %>
+        <img class="media-object tvshow-image" src=<%= image_path('default-poster.png')%> alt="tvshow-image">
+    <% else  %>
+        <img class="media-object tvshow-image" src=<%= @tvshow.poster %> alt="tvshow-image">
+    <% end %>
+  </div>
+  <div class="media-body">
+    <table class="tvshow-info">
+      <tr>
+        <td class="attribute">Year: </td>
+        <td class="value"><%= @tvshow.year %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Rated: </td>
+        <td class="value"><%= @tvshow.rated %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Runtime: </td>
+        <td class="value"><%= @tvshow.runtime %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Genre: </td>
+        <td class="value"><%= @tvshow.genre %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Writers: </td>
+        <td class="value"><%= @tvshow.writer %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Actors: </td>
+        <td class="value"><%= @tvshow.actors %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Plot: </td>
+        <td class="value"><%= @tvshow.plot %></td>
+      </tr>
+      <tr>
+        <td class="attribute">IMDB: </td>
+        <td class="value"><%= @tvshow.imdb_rating %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Seasons: </td>
+        <td class="value"><%= @tvshow.total_seasons %></td>
+      </tr>
+    </table>
+
+    <button type="button" class="btn btn-danger add-tvshow">Delete from Watchlist<span class="glyphicon glyphicon-trash"></span></button>
+  </div>
+</div>
+
+<div class="seasons-container">
+
+  <div class="panel panel-info season">
+    <div class="panel-heading">Season 1</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Season 1</th>
+          <th>Released Date</th>
+          <th>Watched</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Episodul 1</td>
+          <td>01-05-2017</td>
+          <td><input type="checkbox" name="watched"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,14 +1,15 @@
-# documentation
 class TvshowManagerController < ApplicationController
-  before_action :logged, only: :follow
+  before_action :logged, only: :add_to_watchlist
   include TvshowManagerHelper
-  require 'omdbapi'
 
+  # return a view with a search bar and
+  # TO DO: a list with the top rated tv shows by users
   def index
-    # @tv=Tvshow.add_or_create_by_title('The Flash')
   end
 
-  def show
+  # return a view with a search bar and the
+  # api search results list
+  def search
     answer = OMDB.client.search(params[:title])
     @tvshows_list = []
 
@@ -31,12 +32,15 @@ class TvshowManagerController < ApplicationController
     end
   end
 
-  def follow
+  # adds a tv shows to the user's watchlist and
+  # redirects them to the show_search_results view
+  def add_watchlist
     serial = Tvshow.add_or_create(params[:imdb_id])
     for i in 1..serial.total_seasons
       season = OMDB.client.id(serial.imdb_id, season: i.to_s)
       season.episodes.each do |ep|
-        ex = Episode.find_or_create_by(imdb_id: ep.imdb_id) do |episode|
+        puts ep
+        Episode.find_or_create_by(imdb_id: ep.imdb_id) do |episode|
           episode.tvshow_id = serial.id
           episode.title = ep.title
           episode.episode = ep.episode
@@ -49,37 +53,46 @@ class TvshowManagerController < ApplicationController
     begin
       current_user.tvshows << serial
     rescue
-      redirect_to action: 'show',
+      redirect_to action: 'search',
                   title: serial.title,
                   message_text: "An error occured while adding #{ serial.title } to your Watchlist",
                   message_type: "alert-danger"
       return
     end
 
-    redirect_to action: 'show',
+    redirect_to action: 'search',
                 title: serial.title,
                 message_text: "#{ serial.title } was added successfully to your Watchlist",
-                message_type: "alert-success"
+                message_type: 'alert-success'
   end
 
-  def show_tvshows
-    @shows = current_user.tvshows
+  # return a view displaying a user's watchlist
+  def show_watchlist
+    @tvshows_list = current_user.tvshows
   end
 
-  def show_episodes
-    @episodes = Episode.where(tvshow_id: params[:id])
+  # return a view containing all the details for a tv show
+  # and a list for each season with it's coresponding episodes
+  def tvshow_details
+    @tvshow = Tvshow.find(params[:id])
   end
 
+  # marks an episode as watched and redirects them
+  # to the tvshow_details view
   def mark_episode
-    episode = Episode.find(params[:ep])
-    puts episode
-    begin
+    episode = Episode.find(params[:id])
 
+    begin
       current_user.followed_tvshows.find_by(tvshow_id: episode.tvshow_id).episodes << episode
     rescue
-      puts 'magie'
+      redirect_to action: 'tvshow_details',
+                  id: episode.tvshow_id,
+                  message_text: 'An error occurred while marking the episode as watched',
+                  message_type: 'alert-danger'
+      return
     end
-    @followedstuff = current_user.followed_tvshows
+    redirect_to action: 'tvshow_details',
+                id: episode.tvshow_id
   end
 
   def logged

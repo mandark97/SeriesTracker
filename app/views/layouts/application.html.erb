@@ -10,7 +10,6 @@
   <!-- google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Arimo|Arvo|Lato|Lobster" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_link_tag 'tvshow_manager' %>
 </head>
 
 <body>
@@ -58,7 +57,7 @@
     <ul class="nav">
       <!-- LINK TO HOME PAGE -->
       <li class="active">
-        <a href="/">
+        <a href=<%= index_path %>>
           <i class="glyphicon glyphicon-home"></i>
           Home </a>
       </li>
@@ -70,13 +69,13 @@
       </li>
       <!-- LINK TO USER'S WATCHLIST -->
       <li>
-        <a href=<%= tvshow_manager_show_tvshows_path %>>
+        <a href=<%= show_watchlist_path %>>
           <i class="glyphicon glyphicon-eye-open"></i>
           Watchlist </a>
       </li>
       <!-- LINK TO USER'S FINISHED TVSHOWS -->
       <li>
-        <a href="#">
+        <a href=<%= welcome_index_path %>>
           <i class="glyphicon glyphicon-ok"></i>
           Finished TVshows </a>
       </li>
