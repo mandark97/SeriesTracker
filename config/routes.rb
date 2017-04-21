@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'tvshow_manager/tvshow/:id', to: 'tvshow_manager#tvshow_details', as: 'tvshow_details'
   get 'tvshow_manager/mark_episode/:id', to: 'tvshow_manager#mark_episode', as: 'mark_episode'
 
+  post 'episode/new'
+
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
 

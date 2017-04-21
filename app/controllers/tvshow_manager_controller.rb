@@ -1,5 +1,5 @@
 class TvshowManagerController < ApplicationController
-  before_action :logged, only: :add_to_watchlist
+  before_action :logged, only: :add_watchlist
   include TvshowManagerHelper
 
   # return a view with a search bar and
@@ -35,34 +35,42 @@ class TvshowManagerController < ApplicationController
   # adds a tv shows to the user's watchlist and
   # redirects them to the show_search_results view
   def add_watchlist
-    serial = Tvshow.add_or_create(params[:imdb_id])
-    for i in 1..serial.total_seasons
-      season = OMDB.client.id(serial.imdb_id, season: i.to_s)
+   tvshow = Tvshow.add_or_create(params[:imdb_id])
+    for season_nr in 1..tvshow.total_seasons
+      season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
       season.episodes.each do |ep|
-        puts ep
-        Episode.find_or_create_by(imdb_id: ep.imdb_id) do |episode|
-          episode.tvshow_id = serial.id
-          episode.title = ep.title
-          episode.episode = ep.episode
-          episode.imdb_rating = ep.imdb_rating
-          episode.released = ep.released
-        end
+        post_data = {
+            tvshow_id: tvshow.id,
+            season: season_nr,
+        }
+        post_data = ep.merge({
+           tvshow_id: tvshow.id,
+           season: season_nr,
+        })
+
+        HTTParty.post(episode_new_url,
+                      body: post_data.to_json,
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'Accept': 'application/json'
+                      }
+        )
       end
     end
 
     begin
-      current_user.tvshows << serial
+      current_user.tvshows << tvshow
     rescue
       redirect_to action: 'search',
-                  title: serial.title,
-                  message_text: "An error occured while adding #{ serial.title } to your Watchlist",
+                  title: tvshow.title,
+                  message_text: "An error occured while adding #{ tvshow.title } to your Watchlist",
                   message_type: "alert-danger"
       return
     end
 
     redirect_to action: 'search',
-                title: serial.title,
-                message_text: "#{ serial.title } was added successfully to your Watchlist",
+                title: tvshow.title,
+                message_text: "#{ tvshow.title } was added successfully to your Watchlist",
                 message_type: 'alert-success'
   end
 
