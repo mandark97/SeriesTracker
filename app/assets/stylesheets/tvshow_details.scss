@@ -1,3 +1,11 @@
 .seasons-container {
   padding-top: 20px;
 }
+
+.season td:not(.title), .season th:not(.title) {
+  text-align: center;
+}
+
+.season td.toggle-all {
+  text-align: right;
+}

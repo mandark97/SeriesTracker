@@ -35,7 +35,7 @@ class TvshowManagerController < ApplicationController
   # adds a tv shows to the user's watchlist and
   # redirects them to the show_search_results view
   def add_watchlist
-   tvshow = Tvshow.add_or_create(params[:imdb_id])
+   tvshow = Tvshow.find_or_create(params[:imdb_id])
     for season_nr in 1..tvshow.total_seasons
       season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
       season.episodes.each do |ep|
@@ -83,24 +83,13 @@ class TvshowManagerController < ApplicationController
   # and a list for each season with it's coresponding episodes
   def tvshow_details
     @tvshow = Tvshow.find(params[:id])
-  end
 
-  # marks an episode as watched and redirects them
-  # to the tvshow_details view
-  def mark_episode
-    episode = Episode.find(params[:id])
-
-    begin
-      current_user.followed_tvshows.find_by(tvshow_id: episode.tvshow_id).episodes << episode
-    rescue
-      redirect_to action: 'tvshow_details',
-                  id: episode.tvshow_id,
-                  message_text: 'An error occurred while marking the episode as watched',
-                  message_type: 'alert-danger'
-      return
+    if params[:message_text]
+      @message = {
+          'text': params[:message_text],
+          'type': params[:message_type]
+      }
     end
-    redirect_to action: 'tvshow_details',
-                id: episode.tvshow_id
   end
 
   def logged
