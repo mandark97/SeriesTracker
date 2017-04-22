@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421200233) do
+ActiveRecord::Schema.define(version: 20170422121520) do
 
   create_table "episodes", force: :cascade do |t|
-    t.string   "imdb_id"
     t.integer  "tvshow_id"
+    t.string   "imdb_id"
     t.string   "title"
     t.date     "released"
     t.integer  "episode"
@@ -22,6 +22,12 @@ ActiveRecord::Schema.define(version: 20170421200233) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "season"
+    t.string   "director"
+    t.string   "writer"
+    t.string   "actors"
+    t.string   "plot"
+    t.string   "poster"
+    t.string   "awards"
     t.index ["imdb_id"], name: "index_episodes_on_imdb_id"
     t.index ["tvshow_id"], name: "index_episodes_on_tvshow_id"
   end
@@ -66,13 +72,6 @@ ActiveRecord::Schema.define(version: 20170421200233) do
     t.index ["imdb_id"], name: "index_tvshows_on_imdb_id"
   end
 
-  create_table "tweets", force: :cascade do |t|
-    t.integer  "user_id"
-    t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "uid"
     t.string   "name"
@@ -82,24 +81,6 @@ ActiveRecord::Schema.define(version: 20170421200233) do
     t.datetime "updated_at",    null: false
     t.string   "profile_image"
     t.index ["uid"], name: "index_users_on_uid"
-  end
-
-  create_table "watched_episodes", force: :cascade do |t|
-    t.integer  "watched_tv_show_id"
-    t.integer  "episode_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["episode_id"], name: "index_watched_episodes_on_episode_id"
-    t.index ["watched_tv_show_id"], name: "index_watched_episodes_on_watched_tv_show_id"
-  end
-
-  create_table "watched_tv_shows", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "tvshow_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["tvshow_id"], name: "index_watched_tv_shows_on_tvshow_id"
-    t.index ["user_id"], name: "index_watched_tv_shows_on_user_id"
   end
 
 end

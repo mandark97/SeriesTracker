@@ -1,10 +1,10 @@
 <div class="media tvshow-details">
-  <h2 class="tvshow-title"><%= @f_ts.tvshow.title %></h2>
+  <h2 class="tvshow-title"><%= @f_tvshow.tvshow.title %></h2>
   <div class="media-left col-lg-3">
-    <% if @f_ts.tvshow.poster == 'N/A' %>
+    <% if @f_tvshow.tvshow.poster == 'N/A' %>
         <img class="media-object tvshow-image" src=<%= image_path('default-poster.png') %> alt="tvshow-image">
     <% else %>
-        <img class="media-object tvshow-image" src=<%= @f_ts.tvshow.poster %> alt="tvshow-image">
+        <img class="media-object tvshow-image" src=<%= @f_tvshow.tvshow.poster %> alt="tvshow-image">
     <% end %>
   </div>
 
@@ -12,39 +12,39 @@
     <table class="tvshow-info">
       <tr>
         <td class="attribute">Year:</td>
-        <td class="value"><%= @f_ts.tvshow.year %></td>
+        <td class="value"><%= @f_tvshow.tvshow.year %></td>
       </tr>
       <tr>
         <td class="attribute">Rated:</td>
-        <td class="value"><%= @f_ts.tvshow.rated %></td>
+        <td class="value"><%= @f_tvshow.tvshow.rated %></td>
       </tr>
       <tr>
         <td class="attribute">Runtime:</td>
-        <td class="value"><%= @f_ts.tvshow.runtime %></td>
+        <td class="value"><%= @f_tvshow.tvshow.runtime %></td>
       </tr>
       <tr>
         <td class="attribute">Genre:</td>
-        <td class="value"><%= @f_ts.tvshow.genre %></td>
+        <td class="value"><%= @f_tvshow.tvshow.genre %></td>
       </tr>
       <tr>
         <td class="attribute">Writers:</td>
-        <td class="value"><%= @f_ts.tvshow.writer %></td>
+        <td class="value"><%= @f_tvshow.tvshow.writer %></td>
       </tr>
       <tr>
         <td class="attribute">Actors:</td>
-        <td class="value"><%= @f_ts.tvshow.actors %></td>
+        <td class="value"><%= @f_tvshow.tvshow.actors %></td>
       </tr>
       <tr>
         <td class="attribute">Plot:</td>
-        <td class="value"><%= @f_ts.tvshow.plot %></td>
+        <td class="value"><%= @f_tvshow.tvshow.plot %></td>
       </tr>
       <tr>
         <td class="attribute">IMDB:</td>
-        <td class="value"><%= @f_ts.tvshow.imdb_rating %></td>
+        <td class="value"><%= @f_tvshow.tvshow.imdb_rating %></td>
       </tr>
       <tr>
         <td class="attribute">Seasons:</td>
-        <td class="value"><%= @f_ts.tvshow.total_seasons %></td>
+        <td class="value"><%= @f_tvshow.tvshow.total_seasons %></td>
       </tr>
     </table>
 
@@ -58,8 +58,8 @@
 <% end %>
 
 <div class="seasons-container">
-  <% for season_nr in 1..@f_ts.tvshow.total_seasons %>
-      <div class="panel panel-info season">
+  <% for season_nr in 1..@f_tvshow.tvshow.total_seasons %>
+      <div class="panel panel-info season" id="season<%= season_nr%>">
         <div class="panel-heading">Season <%= season_nr %></div>
         <table class="table">
           <thead>
@@ -71,20 +71,20 @@
           </tr>
           </thead>
           <tbody>
-          <% Episode.where(tvshow_id: @f_ts.tvshow.id, season: season_nr).each do |episode| %>
+          <% Episode.where(tvshow_id: @f_tvshow.tvshow.id, season: season_nr).each do |episode| %>
             <tr>
               <td><%= episode.episode%></td>
               <td class="title"><%= episode.title %></td>
               <td><%= episode.released %></td>
                 <td>
-                  <% if (f_ep = @f_ts.followed_episodes.include?) %>
-                    <form action=<%= unmark_episode_path id: f_ep.id%>>
+                  <% if @f_tvshow.episodes.include?(episode) %>
+                    <form action=<%= unfollow_episode_path id: episode.id %>>
                       <label>
                         <input type="checkbox" name="watched" onChange="this.form.submit()" checked>
                       </label>
                     </form>
                   <% else %>
-                    <form action=<%= mark_episode_path id: episode.id%>>
+                    <form action=<%= follow_episode_path id: episode.id%>>
                       <label>
                         <input type="checkbox" name="watched" onChange="this.form.submit()">
                       </label>

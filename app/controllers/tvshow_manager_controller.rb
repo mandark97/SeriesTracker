@@ -34,28 +34,14 @@ class TvshowManagerController < ApplicationController
 
   # adds a tv shows to the user's watchlist and
   # redirects them to the show_search_results view
-  def add_watchlist
-   tvshow = Tvshow.find_or_create(params[:imdb_id])
+  def follow
+   tvshow = Tvshow.add_or_create(params[:imdb_id])
     for season_nr in 1..tvshow.total_seasons
       season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
       season.episodes.each do |ep|
-        post_data = {
-            tvshow_id: tvshow.id,
-            season: season_nr,
-        }
-        post_data = ep.merge({
-           tvshow_id: tvshow.id,
-           season: season_nr,
-        })
-
-        HTTParty.post(episode_new_url,
-                      body: post_data.to_json,
-                      headers: {
-                          'Content-Type': 'application/json',
-                          'Accept': 'application/json'
-                      }
-        )
+        Episode.find_or_create(ep.imdb_id)
       end
+
     end
 
     begin
@@ -75,14 +61,14 @@ class TvshowManagerController < ApplicationController
   end
 
   # return a view displaying a user's watchlist
-  def show_watchlist
+  def watchlist
     @tvshows_list = current_user.tvshows
   end
 
   # return a view containing all the details for a tv show
   # and a list for each season with it's coresponding episodes
   def tvshow_details
-    @f_ts = FollowedTvshow.find(params[:id])
+    @f_tvshow = FollowedTvshow.find(params[:id])
 
     if params[:message_text]
       @message = {
