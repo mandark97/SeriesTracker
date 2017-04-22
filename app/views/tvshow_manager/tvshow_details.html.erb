@@ -1,10 +1,10 @@
 <div class="media tvshow-details">
-  <h2 class="tvshow-title"><%= @tvshow.title %></h2>
+  <h2 class="tvshow-title"><%= @f_ts.tvshow.title %></h2>
   <div class="media-left col-lg-3">
-    <% if @tvshow.poster == 'N/A' %>
+    <% if @f_ts.tvshow.poster == 'N/A' %>
         <img class="media-object tvshow-image" src=<%= image_path('default-poster.png') %> alt="tvshow-image">
     <% else %>
-        <img class="media-object tvshow-image" src=<%= @tvshow.poster %> alt="tvshow-image">
+        <img class="media-object tvshow-image" src=<%= @f_ts.tvshow.poster %> alt="tvshow-image">
     <% end %>
   </div>
 
@@ -12,39 +12,39 @@
     <table class="tvshow-info">
       <tr>
         <td class="attribute">Year:</td>
-        <td class="value"><%= @tvshow.year %></td>
+        <td class="value"><%= @f_ts.tvshow.year %></td>
       </tr>
       <tr>
         <td class="attribute">Rated:</td>
-        <td class="value"><%= @tvshow.rated %></td>
+        <td class="value"><%= @f_ts.tvshow.rated %></td>
       </tr>
       <tr>
         <td class="attribute">Runtime:</td>
-        <td class="value"><%= @tvshow.runtime %></td>
+        <td class="value"><%= @f_ts.tvshow.runtime %></td>
       </tr>
       <tr>
         <td class="attribute">Genre:</td>
-        <td class="value"><%= @tvshow.genre %></td>
+        <td class="value"><%= @f_ts.tvshow.genre %></td>
       </tr>
       <tr>
         <td class="attribute">Writers:</td>
-        <td class="value"><%= @tvshow.writer %></td>
+        <td class="value"><%= @f_ts.tvshow.writer %></td>
       </tr>
       <tr>
         <td class="attribute">Actors:</td>
-        <td class="value"><%= @tvshow.actors %></td>
+        <td class="value"><%= @f_ts.tvshow.actors %></td>
       </tr>
       <tr>
         <td class="attribute">Plot:</td>
-        <td class="value"><%= @tvshow.plot %></td>
+        <td class="value"><%= @f_ts.tvshow.plot %></td>
       </tr>
       <tr>
         <td class="attribute">IMDB:</td>
-        <td class="value"><%= @tvshow.imdb_rating %></td>
+        <td class="value"><%= @f_ts.tvshow.imdb_rating %></td>
       </tr>
       <tr>
         <td class="attribute">Seasons:</td>
-        <td class="value"><%= @tvshow.total_seasons %></td>
+        <td class="value"><%= @f_ts.tvshow.total_seasons %></td>
       </tr>
     </table>
 
@@ -58,7 +58,7 @@
 <% end %>
 
 <div class="seasons-container">
-  <% for season_nr in 1..@tvshow.total_seasons %>
+  <% for season_nr in 1..@f_ts.tvshow.total_seasons %>
       <div class="panel panel-info season">
         <div class="panel-heading">Season <%= season_nr %></div>
         <table class="table">
@@ -71,20 +71,23 @@
           </tr>
           </thead>
           <tbody>
-          <% for episode in Episode.where(tvshow_id: @tvshow.id, season: season_nr) %>
+          <% Episode.where(tvshow_id: @f_ts.tvshow.id, season: season_nr).each do |episode| %>
             <tr>
               <td><%= episode.episode%></td>
               <td class="title"><%= episode.title %></td>
               <td><%= episode.released %></td>
                 <td>
-                  <% f_ep = FollowedEpisode.find_by(episode_id: episode.id) %>
-                  <% if f_ep %>
+                  <% if (f_ep = @f_ts.followed_episodes.include?) %>
                     <form action=<%= unmark_episode_path id: f_ep.id%>>
-                      <input type="checkbox" name="watched" onChange="this.form.submit()" checked>
+                      <label>
+                        <input type="checkbox" name="watched" onChange="this.form.submit()" checked>
+                      </label>
                     </form>
                   <% else %>
                     <form action=<%= mark_episode_path id: episode.id%>>
-                      <input type="checkbox" name="watched" onChange="this.form.submit()">
+                      <label>
+                        <input type="checkbox" name="watched" onChange="this.form.submit()">
+                      </label>
                     </form>
                   <% end %>
                 </td>
@@ -94,7 +97,11 @@
             <td></td>
             <td></td>
             <td class="toggle-all">Toggle All</td>
-            <td><input type="checkbox" name="watched"></td>
+            <td>
+              <label>
+                <input type="checkbox" name="watched">
+              </label>
+            </td>
           </tr>
           </tbody>
         </table>

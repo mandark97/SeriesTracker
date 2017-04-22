@@ -82,7 +82,7 @@ class TvshowManagerController < ApplicationController
   # return a view containing all the details for a tv show
   # and a list for each season with it's coresponding episodes
   def tvshow_details
-    @tvshow = Tvshow.find(params[:id])
+    @f_ts = FollowedTvshow.find(params[:id])
 
     if params[:message_text]
       @message = {
