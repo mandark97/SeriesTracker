@@ -10,10 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419185735) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20170422121520) do
 
   create_table "episodes", force: :cascade do |t|
     t.integer  "tvshow_id"
@@ -24,8 +21,15 @@ ActiveRecord::Schema.define(version: 20170419185735) do
     t.float    "imdb_rating"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["imdb_id"], name: "index_episodes_on_imdb_id", using: :btree
-    t.index ["tvshow_id"], name: "index_episodes_on_tvshow_id", using: :btree
+    t.integer  "season"
+    t.string   "director"
+    t.string   "writer"
+    t.string   "actors"
+    t.string   "plot"
+    t.string   "poster"
+    t.string   "awards"
+    t.index ["imdb_id"], name: "index_episodes_on_imdb_id"
+    t.index ["tvshow_id"], name: "index_episodes_on_tvshow_id"
   end
 
   create_table "followed_episodes", force: :cascade do |t|
@@ -34,8 +38,8 @@ ActiveRecord::Schema.define(version: 20170419185735) do
     t.boolean  "status"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-    t.index ["episode_id"], name: "index_followed_episodes_on_episode_id", using: :btree
-    t.index ["followed_tvshow_id"], name: "index_followed_episodes_on_followed_tvshow_id", using: :btree
+    t.index ["episode_id"], name: "index_followed_episodes_on_episode_id"
+    t.index ["followed_tvshow_id"], name: "index_followed_episodes_on_followed_tvshow_id"
   end
 
   create_table "followed_tvshows", force: :cascade do |t|
@@ -43,8 +47,8 @@ ActiveRecord::Schema.define(version: 20170419185735) do
     t.integer  "tvshow_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tvshow_id"], name: "index_followed_tvshows_on_tvshow_id", using: :btree
-    t.index ["user_id"], name: "index_followed_tvshows_on_user_id", using: :btree
+    t.index ["tvshow_id"], name: "index_followed_tvshows_on_tvshow_id"
+    t.index ["user_id"], name: "index_followed_tvshows_on_user_id"
   end
 
   create_table "tvshows", force: :cascade do |t|
@@ -65,7 +69,7 @@ ActiveRecord::Schema.define(version: 20170419185735) do
     t.integer  "total_seasons"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.index ["imdb_id"], name: "index_tvshows_on_imdb_id", using: :btree
+    t.index ["imdb_id"], name: "index_tvshows_on_imdb_id"
   end
 
   create_table "tweets", force: :cascade do |t|
@@ -83,11 +87,7 @@ ActiveRecord::Schema.define(version: 20170419185735) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "profile_image"
-    t.index ["uid"], name: "index_users_on_uid", using: :btree
+    t.index ["uid"], name: "index_users_on_uid"
   end
 
-  add_foreign_key "followed_episodes", "episodes"
-  add_foreign_key "followed_episodes", "followed_tvshows"
-  add_foreign_key "followed_tvshows", "tvshows"
-  add_foreign_key "followed_tvshows", "users"
 end

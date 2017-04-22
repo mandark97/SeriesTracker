@@ -1,0 +1,57 @@
+form.search-bar {
+  margin: 10px auto;
+  z-index: 0;
+}
+
+.tvshow-details .tvshow-image {
+  width: 100%;
+}
+
+.tvshow-details table.tvshow-info td {
+  padding: 5px;
+}
+
+.tvshow-details table.tvshow-info td.attribute {
+  color: #337ab7;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  line-height: normal;
+  font-size: 16px;
+}
+
+.tvshow-details table.tvshow-info td.value {
+  font-family: 'Arimo', sans-serif;
+  line-height: normal;
+  font-size: 16px;
+}
+
+.tvshow-details .tvshow-title {
+  font-family: 'Arvo', serif;
+  margin: 0;
+  padding-left: 15px;
+  padding-bottom: 5px;
+}
+
+.tvshow-details {
+  background-color: white;
+  padding: 10px 10px 10px 0;
+  border: solid white 1px;
+  border-radius: 5px;
+
+}
+
+.tvshow-details button.add-tvshow {
+  float:right;
+  margin-right: 10px;
+  font-size: 1.3em;
+}
+
+.tvshow-details button.add-tvshow > span {
+  padding-left: 5px;
+}
+
+@media (max-width: 991px) {
+  .tvshow-details table.tvshow-info td {
+    font-size: 1.4em !important;
+  }
+}

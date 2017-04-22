@@ -1,0 +1,16 @@
+<% @tvshows_list.each do |tvshow| %>
+  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container">
+    <a href=<%= tvshow_details_path id: tvshow.id %>>
+    <div class="thumbnail tvshow-card">
+      <% if tvshow.poster == 'N/A' %>
+          <img class="tvshow-poster" src="<%= image_path('default-poster.png')%>" alt="tvshow-image">
+      <% else  %>
+          <img class="tvshow-poster" src="<%= tvshow.poster %>" alt="tvshow-image">
+      <% end %>
+      <div class="caption">
+        <h4 class="tvshow-title"><%= tvshow.title %> (<%= tvshow.year %>)</h4>
+      </div>
+    </div>
+    </a>
+  </div>
+<% end %>

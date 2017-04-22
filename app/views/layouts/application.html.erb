@@ -8,7 +8,7 @@
   <!-- bootstrap css -->
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- google fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Arimo|Arvo|Lato|Lobster" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 </head>
 
@@ -57,7 +57,7 @@
     <ul class="nav">
       <!-- LINK TO HOME PAGE -->
       <li class="active">
-        <a href="#">
+        <a href=<%= root_path %>>
           <i class="glyphicon glyphicon-home"></i>
           Home </a>
       </li>
@@ -69,7 +69,7 @@
       </li>
       <!-- LINK TO USER'S WATCHLIST -->
       <li>
-        <a href="/tvshow_manager/show_tvshows">
+        <a href=<%= watchlist_path %>>
           <i class="glyphicon glyphicon-eye-open"></i>
           Watchlist </a>
       </li>

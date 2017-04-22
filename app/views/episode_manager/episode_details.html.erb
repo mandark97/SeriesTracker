@@ -1,0 +1,46 @@
+<div class="media tvshow-details">
+  <h2 class="tvshow-title"><%= @episode.title%></h2>
+  <div class="media-left col-lg-3">
+    <% if @episode.poster == 'N/A' %>
+        <img class="media-object tvshow-image" src=<%= image_path('default-poster.png')%> alt="tvshow-image">
+    <% else  %>
+        <img class="media-object tvshow-image" src=<%= @episode.poster %> alt="tvshow-image">
+    <% end %>
+  </div>
+  <div class="media-body">
+    <table class="tvshow-info">
+      <tr>
+        <td class="attribute">Season: </td>
+        <td class="value"><%= @episode.season %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Episode: </td>
+        <td class="value"><%= @episode.episode %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Released: </td>
+        <td class="value"><%= @episode.released %></td>
+      </tr>
+      <tr>
+        <td class="attribute">IMDB: </td>
+        <td class="value"><%= @episode.imdb_rating %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Director: </td>
+        <td class="value"><%= @episode.director %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Writers: </td>
+        <td class="value"><%= @episode.writer %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Actors: </td>
+        <td class="value"><%= @episode.actors %></td>
+      </tr>
+      <tr>
+        <td class="attribute">Plot: </td>
+        <td class="value"><%= @episode.plot %></td>
+      </tr>
+    </table>
+  </div>
+</div>
