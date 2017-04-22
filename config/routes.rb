@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-
   get '/auth/:provider/callback', to: 'sessions#create'
+
+  resources :tweets
+  # creates the following paths:
+      # tweets ~ tweets#index
+      # new_tweet ~ tweets#new
+      # edit_tweet ~ tweets#edit
+      # etc.
 
   root to: 'tvshow_manager#index'
   get 'tvshow_manager/search', as: 'search'
