@@ -17,6 +17,8 @@ class EpisodeManagerController < ApplicationController
     redirect_to tvshow_details_path id: episode.tvshow_id, :anchor => "season#{ episode.season }"
   end
 
+  # marks an episode as unwatched and redirects them
+  # to the tvshow_details view
   def unfollow
     episode = Episode.find(params[:id])
     followed_tvshow = current_user.followed_tvshows.find_by(tvshow_id: episode.tvshow_id)
@@ -32,6 +34,10 @@ class EpisodeManagerController < ApplicationController
     end
 
     redirect_to tvshow_details_path id: followed_tvshow.id, :anchor => "season#{ episode.season }"
+  end
+
+  def episode_details
+    @episode = Episode.find(params[:id])
   end
 
   private

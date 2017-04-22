@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post 'episode_manager/new', as: 'new_episode'
   get 'episode_manager/follow/:id', to: 'episode_manager#follow', as: 'follow_episode'
   get 'episode_manager/unfollow/:id', to: 'episode_manager#unfollow', as: 'unfollow_episode'
+  get 'episode_manager/episode/:id', to: 'episode_manager#episode_details', as: 'episode_details'
 
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
