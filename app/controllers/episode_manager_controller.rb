@@ -1,5 +1,6 @@
 class EpisodeManagerController < ApplicationController
   protect_from_forgery :except => :new
+  before_action :check_login
 
   def new
     ep = Episode.find_or_create_by(imdb_id: params[:imdb_id]) do |episode|
@@ -38,4 +39,8 @@ class EpisodeManagerController < ApplicationController
     redirect_to tvshow_details_path id: tvshow_id
   end
 
+  private
+  def check_login
+    redirect_to root_path unless current_user
+  end
 end

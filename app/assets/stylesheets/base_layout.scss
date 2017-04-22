@@ -36,9 +36,6 @@ body {
 }
 
 .sidebar-userprofile {
-  padding-top: 20px;
-  /* margin: 10px 0 20px 0; */
-  background-color: #d6e0ff;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -94,13 +91,13 @@ body {
   background-color: #337ab7;
   height: 45px;
   position: fixed;
-  top: 0px;
+  top: 0;
   z-index: 1;
 }
 
 .header > i.fa-bars {
   display: none;
-  padding: 7px 0px 0px 10px;
+  padding: 7px 0 0 10px;
   color: white;
   cursor: pointer;
   position: absolute;
@@ -137,7 +134,7 @@ body {
 .sidebar-wrapper {
   padding: 0;
   position: fixed;
-  top: 0px;
+  top: 0;
   height: 100%;
   z-index: 2;
   -webkit-transition: left 1.5s;

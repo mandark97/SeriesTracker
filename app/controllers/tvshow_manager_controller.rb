@@ -1,5 +1,5 @@
 class TvshowManagerController < ApplicationController
-  before_action :logged, only: :add_watchlist
+  before_action :check_login, except: :index
   include TvshowManagerHelper
 
   # return a view with a search bar and
@@ -92,9 +92,8 @@ class TvshowManagerController < ApplicationController
     end
   end
 
-  def logged
-    if current_user == nil?
-      redirect_to root_path
-    end
+  private
+  def check_login
+    redirect_to root_path unless current_user
   end
 end

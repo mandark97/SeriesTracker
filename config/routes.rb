@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/auth/:provider/callback', to: 'sessions#create'
 
-  root to: 'tvshow_manager#index', as: 'index'
+  root to: 'tvshow_manager#index'
   get 'tvshow_manager/search', as: 'search'
   get 'tvshow_manager/add_watchlist/:imdb_id', to: 'tvshow_manager#add_watchlist', as: 'add_watchlist'
   get 'tvshow_manager/show_watchlist', as: 'show_watchlist'
