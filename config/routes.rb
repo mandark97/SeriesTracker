@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root to: 'tvshow_manager#index'
   get 'tvshow_manager/search', as: 'search'
   get 'tvshow_manager/follow/:imdb_id', to: 'tvshow_manager#follow', as: 'follow_tvshow'
+  get 'tvshow_manager/unfollow/:id', to: 'tvshow_manager#unfollow'
   get 'tvshow_manager/watchlist', as: 'watchlist'
   get 'tvshow_manager/tvshow/:id', to: 'tvshow_manager#tvshow_details', as: 'tvshow_details'
 
