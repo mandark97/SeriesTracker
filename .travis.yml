@@ -6,6 +6,7 @@ env:
 script:
   - RAILS_ENV=test bundle exec rake db:create db:migrate --trace
   - bundle exec rspec spec/
+  - rubocop
 before_script:
   - cp config/database.travis.yml config/database.yml
   - mysql -e 'create database SeriesTracker_test'
