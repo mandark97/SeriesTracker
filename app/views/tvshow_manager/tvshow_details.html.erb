@@ -71,7 +71,7 @@
           </tr>
           </thead>
           <tbody>
-          <% Episode.where(tvshow_id: @f_tvshow.tvshow.id, season: season_nr).each do |episode| %>
+          <% Episode.where(tvshow_id: @f_tvshow.tvshow.id, season: season_nr).sort.each do |episode| %>
             <tr>
               <td><%= episode.episode%></td>
               <td class="title"><a href=<%= episode_details_path id: episode.id %> ><%= episode.title %></a></td>
