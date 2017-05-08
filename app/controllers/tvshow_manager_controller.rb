@@ -36,8 +36,6 @@ class TvshowManagerController < ApplicationController
   # redirects them to the show_search_results view
   def follow
     tvshow = Tvshow.add_or_create(params[:imdb_id])
-    end
-
     begin
       current_user.tvshows << tvshow
     rescue
@@ -52,6 +50,7 @@ class TvshowManagerController < ApplicationController
                 title: tvshow.title,
                 message_text: "#{ tvshow.title } was added successfully to your Watchlist",
                 message_type: 'alert-success'
+
   end
 
   def unfollow

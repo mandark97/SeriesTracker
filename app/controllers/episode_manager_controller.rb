@@ -60,4 +60,9 @@ class EpisodeManagerController < ApplicationController
   def episode_details
     @episode = Episode.find(params[:id])
   end
+
+  private
+  def check_login
+    redirect_to root_path unless current_user
+  end
 end
