@@ -42,9 +42,10 @@ class TvshowManagerController < ApplicationController
       redirect_to action: 'search',
                   title: tvshow.title,
                   message_text: "An error occured while adding #{ tvshow.title } to your Watchlist",
-                  message_type: 'alert-danger'
+                  message_type: "alert-danger"
       return
     end
+
     redirect_to action: 'search',
                 title: tvshow.title,
                 message_text: "#{ tvshow.title } was added successfully to your Watchlist",
