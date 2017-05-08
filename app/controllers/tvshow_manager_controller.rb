@@ -60,6 +60,14 @@ class TvshowManagerController < ApplicationController
                 message_type: 'alert-success'
   end
 
+  def unfollow
+    tvshow = current_user.followed_tvshows.find_by(tvshow_id:params[:id])
+    tvshow.followed_episodes.each do |episode|
+      episode.destroy
+    end
+    tvshow.destroy
+    redirect_to watchlist_path
+  end
   # return a view displaying a user's watchlist
   def watchlist
     @tvshows_list = current_user.tvshows
@@ -68,7 +76,7 @@ class TvshowManagerController < ApplicationController
   # return a view containing all the details for a tv show
   # and a list for each season with it's coresponding episodes
   def tvshow_details
-    @f_tvshow = FollowedTvshow.find(params[:id])
+    @f_tvshow = FollowedTvshow.find_by(tvshow_id: params[:id])
 
     if params[:message_text]
       @message = {
