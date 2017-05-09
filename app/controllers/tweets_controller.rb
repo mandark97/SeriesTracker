@@ -1,5 +1,4 @@
 class TweetsController < ApplicationController
-
   # Not secure, but whatever. You'll get this error
   # "SSL_connect returned=1 errno=0 state=SSLv3 read server certificate
   # B: certificate verify failed" if you detele the following two lines
@@ -44,11 +43,11 @@ class TweetsController < ApplicationController
   end
 
   private
-  def set_tweet
-    @tweet = Tweet.find(params[:id])
-  end
+    def set_tweet
+      @tweet = Tweet.find(params[:id])
+    end
 
-  def tweet_params
-    params.require(:tweet).permit(:user_id, :body)
-  end
+    def tweet_params
+      params.require(:tweet).permit(:user_id, :body)
+    end
 end

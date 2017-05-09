@@ -35,13 +35,12 @@ class TvshowManagerController < ApplicationController
   # adds a tv shows to the user's watchlist and
   # redirects them to the show_search_results view
   def follow
-   tvshow = Tvshow.add_or_create(params[:imdb_id])
+    tvshow = Tvshow.add_or_create(params[:imdb_id])
     for season_nr in 1..tvshow.total_seasons
       season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
       season.episodes.each do |ep|
         Episode.find_or_create(ep.imdb_id)
       end
-
     end
 
     begin
@@ -50,7 +49,7 @@ class TvshowManagerController < ApplicationController
       redirect_to action: 'search',
                   title: tvshow.title,
                   message_text: "An error occured while adding #{ tvshow.title } to your Watchlist",
-                  message_type: "alert-danger"
+                  message_type: 'alert-danger'
       return
     end
 
@@ -68,16 +67,11 @@ class TvshowManagerController < ApplicationController
     tvshow.destroy
     redirect_to watchlist_path
   end
-  # return a view displaying a user's watchlist
-  def watchlist
-    @tvshows_list = current_user.tvshows
-  end
 
   # return a view containing all the details for a tv show
   # and a list for each season with it's coresponding episodes
   def tvshow_details
     @f_tvshow = FollowedTvshow.find_by(tvshow_id: params[:id])
-
     if params[:message_text]
       @message = {
           'text': params[:message_text],
@@ -86,8 +80,55 @@ class TvshowManagerController < ApplicationController
     end
   end
 
-  private
-  def check_login
-    redirect_to root_path unless current_user
+=begin
+  def episodes_of_the_week
+    beginning_of_week = Time.current.utc.beginning_of_week
+    end_of_week = Time.current.utc.end_of_week
+    episodes_this_week = []
+    current_user.followed_tvshows.each do |ftvshow|
+      episode = ftvshow.tvshow.episodes.find_by(released: beginning_of_week..end_of_week)
+      episodes_this_week << episode unless episode.nil?
+    end
+    return episodes_this_week
+  end
+=end
+
+=begin
+  def last_episodes
+    @last_episode = []
+    current_user.followed_tvshows.each do |ftvshow|
+      fepisode = ftvshow.followed_episodes.order(:created_at).last
+      @last_episode << fepisode.episode unless fepisode.nil?
+    end
+
+    @episodes_this_week = episodes_of_the_week
+  end
+=end
+
+  def watchlist
+    @watchlist = {
+        'new_this_week': [],
+        'last_episodes': [],
+        'begin_watching': []
+    }
+
+    beginning_of_week = Time.current.utc.beginning_of_week
+    end_of_week = Time.current.utc.end_of_week
+
+    current_user.followed_tvshows.each do |f_tvshow|
+      episode = f_tvshow.tvshow.episodes.find_by(released: beginning_of_week..end_of_week)
+
+      if !episode.nil? #tvshow has new episode this week
+        @watchlist.new_this_week << episode
+      else #show last watched episode
+        f_episode = f_tvshow.followed_episodes.order(:created_at).last
+
+        if f_episode.nil? # the user hasn't begin to watch the tvshow yet
+          @watchlist.begin_watching << f_tvshow.tvshow
+        else
+          @watchlist.last_episodes << f_episode.episode
+        end
+      end
+    end
   end
 end

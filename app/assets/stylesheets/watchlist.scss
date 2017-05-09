@@ -1,3 +1,7 @@
+.tvshow-card {
+  min-height: 405px;
+}
+
 .tvshow-card  h4.tvshow-title {
   margin: 0 auto;
   text-align: center;
@@ -46,5 +50,12 @@
     clear: left;
   }
 }
+
+.list-title {
+  margin: 0;
+  padding-bottom: 5px;
+  font-family: 'Arvo', serif;
+}
+
 
 
