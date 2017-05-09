@@ -100,4 +100,31 @@ class TvshowManagerController < ApplicationController
       end
     end
   end
+
+  def watchlist
+    @watchlist = {
+        'new_this_week': [],
+        'last_episodes': [],
+        'begin_watching': []
+    }
+
+    beginning_of_week = Time.current.utc.beginning_of_week
+    end_of_week = Time.current.utc.end_of_week
+
+    current_user.followed_tvshows.each do |f_tvshow|
+      episode = f_tvshow.tvshow.episodes.find_by(released: beginning_of_week..end_of_week)
+
+      if !episode.nil? #tvshow has new episode this week
+        @watchlist.new_this_week << episode
+      else #show last watched episode
+        f_episode = f_tvshow.followed_episodes.order(:created_at).last
+
+        if f_episode.nil? # the user hasn't begin to watch the tvshow yet
+          @watchlist.begin_watching << f_tvshow.tvshow
+        else
+          @watchlist.last_episodes << f_episode.episode
+        end
+      end
+    end
+  end
 end
