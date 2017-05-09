@@ -5,6 +5,9 @@ class TvshowManagerController < ApplicationController
   # return a view with a search bar and
   # TO DO: a list with the top rated tv shows by users
   def index
+    if current_user
+      redirect_to tvshow_manager_last_episodes_path
+    end
   end
 
   # return a view with a search bar and the
@@ -50,7 +53,6 @@ class TvshowManagerController < ApplicationController
                 title: tvshow.title,
                 message_text: "#{ tvshow.title } was added successfully to your Watchlist",
                 message_type: 'alert-success'
-
   end
 
   def unfollow
