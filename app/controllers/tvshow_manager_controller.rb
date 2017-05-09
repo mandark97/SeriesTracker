@@ -5,9 +5,6 @@ class TvshowManagerController < ApplicationController
   # return a view with a search bar and
   # TO DO: a list with the top rated tv shows by users
   def index
-    if current_user
-      redirect_to tvshow_manager_last_episodes_path
-    end
   end
 
   # return a view with a search bar and the
@@ -83,6 +80,7 @@ class TvshowManagerController < ApplicationController
     end
   end
 
+=begin
   def episodes_of_the_week
     beginning_of_week = Time.current.utc.beginning_of_week
     end_of_week = Time.current.utc.end_of_week
@@ -93,7 +91,9 @@ class TvshowManagerController < ApplicationController
     end
     return episodes_this_week
   end
+=end
 
+=begin
   def last_episodes
     @last_episode = []
     current_user.followed_tvshows.each do |ftvshow|
@@ -103,6 +103,7 @@ class TvshowManagerController < ApplicationController
 
     @episodes_this_week = episodes_of_the_week
   end
+=end
 
   def watchlist
     @watchlist = {
