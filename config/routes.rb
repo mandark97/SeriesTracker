@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'tvshow_manager/tvshow/:id', to: 'tvshow_manager#tvshow_details', as: 'tvshow_details'
   get 'tvshow_manager/episodes_of_the_week'
   get 'tvshow_manager/last_episodes'
+
   post 'episode_manager/new', as: 'new_episode'
   get 'episode_manager/follow/:id', to: 'episode_manager#follow', as: 'follow_episode'
   get 'episode_manager/unfollow/:id', to: 'episode_manager#unfollow', as: 'unfollow_episode'
