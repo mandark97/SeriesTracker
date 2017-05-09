@@ -5,6 +5,9 @@ class TvshowManagerController < ApplicationController
   # return a view with a search bar and
   # TO DO: a list with the top rated tv shows by users
   def index
+    if current_user
+      redirect_to tvshow_manager_last_episodes_path
+    end
   end
 
   # return a view with a search bar and the
@@ -36,6 +39,13 @@ class TvshowManagerController < ApplicationController
   # redirects them to the show_search_results view
   def follow
     tvshow = Tvshow.add_or_create(params[:imdb_id])
+    for season_nr in 1..tvshow.total_seasons
+      season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
+      season.episodes.each do |ep|
+        Episode.find_or_create(ep.imdb_id)
+      end
+    end
+
     begin
       current_user.tvshows << tvshow
     rescue
@@ -74,32 +84,6 @@ class TvshowManagerController < ApplicationController
     end
   end
 
-  def watchlist
-    @watchlist = {
-        'new_this_week': [],
-        'last_episodes': [],
-        'begin_watching': []
-    }
-
-    beginning_of_week = Time.current.utc.beginning_of_week
-    end_of_week = Time.current.utc.end_of_week
-
-    current_user.followed_tvshows.each do |f_tvshow|
-      episode = f_tvshow.tvshow.episodes.find_by(released: beginning_of_week..end_of_week)
-
-      if !episode.nil? #tvshow has new episode this week
-        @watchlist.new_this_week << episode
-      else #show last watched episode
-        f_episode = f_tvshow.followed_episodes.order(:created_at).last
-
-        if f_episode.nil? # the user hasn't begin to watch the tvshow yet
-          @watchlist.begin_watching << f_tvshow.tvshow
-        else
-          @watchlist.last_episodes << f_episode.episode
-        end
-      end
-    end
-  end
 
   def watchlist
     @watchlist = {
