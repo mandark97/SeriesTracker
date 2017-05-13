@@ -5,6 +5,10 @@ class TvshowManagerController < ApplicationController
   # return a view with a search bar and
   # TO DO: a list with the top rated tv shows by users
   def index
+    tvshow_list = ['tt2193021','tt3107288','tt1740299','tt4254242','tt3148266','tt0773262','tt0944947','tt0903747','tt0460649','tt1845307']
+    tvshow_list.each do |tvshowIMDB|
+      Tvshow.add_or_create(tvshowIMDB)
+    end
   end
 
   # return a view with a search bar and the
@@ -36,13 +40,6 @@ class TvshowManagerController < ApplicationController
   # redirects them to the show_search_results view
   def follow
     tvshow = Tvshow.add_or_create(params[:imdb_id])
-    for season_nr in 1..tvshow.total_seasons
-      season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
-      season.episodes.each do |ep|
-        Episode.find_or_create(ep.imdb_id)
-      end
-    end
-
     begin
       current_user.tvshows << tvshow
     rescue
@@ -52,11 +49,11 @@ class TvshowManagerController < ApplicationController
                   message_type: 'alert-danger'
       return
     end
-
     redirect_to action: 'search',
                 title: tvshow.title,
                 message_text: "#{ tvshow.title } was added successfully to your Watchlist",
                 message_type: 'alert-success'
+
   end
 
   def unfollow
@@ -79,31 +76,6 @@ class TvshowManagerController < ApplicationController
       }
     end
   end
-
-=begin
-  def episodes_of_the_week
-    beginning_of_week = Time.current.utc.beginning_of_week
-    end_of_week = Time.current.utc.end_of_week
-    episodes_this_week = []
-    current_user.followed_tvshows.each do |ftvshow|
-      episode = ftvshow.tvshow.episodes.find_by(released: beginning_of_week..end_of_week)
-      episodes_this_week << episode unless episode.nil?
-    end
-    return episodes_this_week
-  end
-=end
-
-=begin
-  def last_episodes
-    @last_episode = []
-    current_user.followed_tvshows.each do |ftvshow|
-      fepisode = ftvshow.followed_episodes.order(:created_at).last
-      @last_episode << fepisode.episode unless fepisode.nil?
-    end
-
-    @episodes_this_week = episodes_of_the_week
-  end
-=end
 
   def watchlist
     @watchlist = {
