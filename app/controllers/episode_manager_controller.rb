@@ -17,14 +17,17 @@ class EpisodeManagerController < ApplicationController
     redirect_to tvshow_details_path id: episode.tvshow_id, :anchor => "season#{ episode.season }"
   end
 
-  def follow_all
+  # toggle all episodes from a season
+  def toggle_all
     f_tvshow = current_user.followed_tvshows.find_by(tvshow_id: params[:show_id])
     episodes = f_tvshow.episodes
     Episode.where(tvshow_id: f_tvshow.tvshow_id, season: params[:season_nr]).each do |ep|
       e = f_tvshow.followed_episodes.find_by(episode_id: ep.id)
-      if episodes.include?(ep)
-        e.delete
-      else
+      if params[:t] == 'true'
+        unless e.nil?
+          e.delete
+        end
+      elsif !episodes.include?(ep)
         episodes << ep
       end
     end
