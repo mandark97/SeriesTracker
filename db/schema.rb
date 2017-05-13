@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514153338) do
+ActiveRecord::Schema.define(version: 20170422121520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "comments", force: :cascade do |t|
-    t.string   "commentable_type"
-    t.integer  "commentable_id"
-    t.integer  "user_id"
-    t.text     "body"
-    t.string   "user_name"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-  end
 
   create_table "episodes", force: :cascade do |t|
     t.integer  "tvshow_id"
@@ -103,4 +93,8 @@ ActiveRecord::Schema.define(version: 20170514153338) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
+  add_foreign_key "followed_episodes", "episodes"
+  add_foreign_key "followed_episodes", "followed_tvshows"
+  add_foreign_key "followed_tvshows", "tvshows"
+  add_foreign_key "followed_tvshows", "users"
 end

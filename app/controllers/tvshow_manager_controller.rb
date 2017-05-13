@@ -5,9 +5,6 @@ class TvshowManagerController < ApplicationController
   # return a view with a search bar and
   # TO DO: a list with the top rated tv shows by users
   def index
-    if current_user
-      redirect_to tvshow_manager_last_episodes_path
-    end
   end
 
   # return a view with a search bar and the
@@ -39,6 +36,8 @@ class TvshowManagerController < ApplicationController
   # redirects them to the show_search_results view
   def follow
     tvshow = Tvshow.add_or_create(params[:imdb_id])
+    end
+
     begin
       current_user.tvshows << tvshow
     rescue
