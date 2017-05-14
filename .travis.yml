@@ -8,6 +8,8 @@ script:
   - bundle exec rspec spec/
   - bundle exec rubocop
 before_script:
+  - gem install bundler --no-ri --no-rdoc
+  - bundle install --jobs $(nproc)  "${FLAGS[@]}"
   - cp config/database.travis.yml config/database.yml
   - mysql -e 'create database SeriesTracker_test'
 
