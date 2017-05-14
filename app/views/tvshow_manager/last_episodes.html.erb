@@ -1,0 +1,42 @@
+<form class = "input-group col-lg-9 search-bar" action =<%= search_path %>>
+  <input type = "text" class = "form-control" placeholder = "Search for..." name = "title" >
+  <span class = "input-group-btn" >
+    <button class = "btn btn-primary" type = "submit" >Go!</button >
+  </span >
+</form >
+<h1> Pick up where you left off:</h1>
+<% @last_episode.each do |episode| %>
+    <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
+      <a href =<%= tvshow_details_path id: episode.tvshow.id %>>
+        <div class = "thumbnail tvshow-card" >
+          <% if episode.tvshow.poster == 'N/A' %>
+              <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
+          <% else %>
+              <img class = "tvshow-poster" src = "<%= episode.tvshow.poster %>" alt = "tvshow-image" >
+          <% end %>
+          <div class = "caption" >
+            <h4 class = "tvshow-title" ><%= episode.tvshow.title %> (<%= episode.tvshow.year %>)</h4 >
+            <h4 class = "tvshow-title" >Season <%= episode.season %>  Episode <%= episode.episode %></h4 >
+          </div >
+        </div >
+      </a >
+    </div >
+<% end %>
+<h1>New this week</h1>
+<% @episodes_this_week.each do |episode| %>
+    <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
+      <a href =<%= tvshow_details_path id: episode.tvshow.id %>>
+        <div class = "thumbnail tvshow-card" >
+          <% if episode.tvshow.poster == 'N/A' %>
+              <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
+          <% else %>
+              <img class = "tvshow-poster" src = "<%= episode.tvshow.poster %>" alt = "tvshow-image" >
+          <% end %>
+          <div class = "caption" >
+            <h4 class = "tvshow-title" ><%= episode.tvshow.title %> (<%= episode.tvshow.year %>)</h4 >
+            <h4 class = "tvshow-title" >Season <%= episode.season %>  Episode <%= episode.episode %></h4 >
+          </div >
+        </div >
+      </a >
+    </div >
+<% end %>
