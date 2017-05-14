@@ -8,10 +8,8 @@
   <% else %>
       <% commentable.comments.each do |comment| %>
           <div class = "well">
-            Name: <%= User.find(@comment.user_id).name %> <br />
-            Body: <br />
-            <%= comment.body %>
-
+            Name: <%= comment.user_name %><br />
+            Body: <%= comment.body %>
           </div>
       <% end %>
   <% end %>
