@@ -2,6 +2,7 @@ class Episode < ApplicationRecord
   belongs_to :tvshow
   has_many :followed_episodes
   has_many :followed_tvshows, through: :followed_episodes
+  has_many :comments, as: :commentable
   validates :imdb_id, uniqueness: true
 
   def self.find_or_create(imdb_id)

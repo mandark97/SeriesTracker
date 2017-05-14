@@ -13,6 +13,11 @@ Rails.application.routes.draw do
   get 'episode_manager/toggle_all/:season_nr :show_id', to: 'episode_manager#toggle_all', as: 'toggle_all'
   get 'episode_manager/unfollow/:id', to: 'episode_manager#unfollow', as: 'unfollow_episode'
   get 'episode_manager/episode/:id', to: 'episode_manager#episode_details', as: 'episode_details'
+
   delete '/logout', to: 'sessions#destroy'
   get '/logout', to: 'sessions#destroy'
+  resources :episodes do
+    resources :comments, module: :episodes
+  end
+
 end
