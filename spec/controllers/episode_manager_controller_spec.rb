@@ -31,6 +31,13 @@ RSpec.describe EpisodeManagerController, type: :controller do
       matei.followed_tvshows.first.episodes << episode
     end
     subject { get :unfollow, params: { id: episode.id } }
+    it 'redirects to tvshow details' do
+      expect(subject).to have_http_status(302)
+      expect(subject).to redirect_to(controller: :tvshow_manager,
+                                     action: :tvshow_details,
+                                     id: episode.tvshow_id,
+                                     anchor: "season#{ episode.season }")
+    end
     it 'deletes the episode' do
       subject
       expect(matei.followed_tvshows.first.episodes.count).to eq 0
