@@ -44,3 +44,6 @@
     </table>
   </div>
 </div>
+
+<%= render partial: "comments/comments", locals: {commentable: @episode} %>
+<%= render partial: "comments/form", locals: {commentable: @episode} %>

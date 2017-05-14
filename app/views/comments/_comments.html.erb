@@ -1,0 +1,18 @@
+<div class="media tvshow-details">
+  <h3 class="tvshow-title">Comments</h3>
+
+  <% if commentable.comments.count == 0 %>
+      <div>
+        Be the first one to leave a comment!
+      </div>
+  <% else %>
+      <% commentable.comments.each do |comment| %>
+          <div class = "well">
+            Name: <%= User.find(@comment.user_id).name %> <br />
+            Body: <br />
+            <%= comment.body %>
+
+          </div>
+      <% end %>
+  <% end %>
+</div>
