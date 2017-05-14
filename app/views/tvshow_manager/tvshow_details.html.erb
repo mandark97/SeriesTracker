@@ -1,127 +1,119 @@
-<div class="media tvshow-details">
-  <h2 class="tvshow-title"><%= @f_tvshow.tvshow.title %></h2>
-  <div class="media-left col-lg-3">
+<div class = "media tvshow-details" >
+  <h2 class = "tvshow-title" ><%= @f_tvshow.tvshow.title %></h2 >
+  <div class = "media-left col-lg-3" >
     <% if @f_tvshow.tvshow.poster == 'N/A' %>
-        <img class="media-object tvshow-image" src=<%= image_path('default-poster.png') %> alt="tvshow-image">
+        <img class = "media-object tvshow-image" src = <%= image_path('default-poster.png') %> alt="tvshow-image" >
     <% else %>
-        <img class="media-object tvshow-image" src=<%= @f_tvshow.tvshow.poster %> alt="tvshow-image">
+        <img class = "media-object tvshow-image" src = <%= @f_tvshow.tvshow.poster %> alt="tvshow-image" >
     <% end %>
-  </div>
+  </div >
 
-  <div class="media-body">
-    <table class="tvshow-info">
-      <tr>
-        <td class="attribute">Year:</td>
-        <td class="value"><%= @f_tvshow.tvshow.year %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Rated:</td>
-        <td class="value"><%= @f_tvshow.tvshow.rated %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Runtime:</td>
-        <td class="value"><%= @f_tvshow.tvshow.runtime %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Genre:</td>
-        <td class="value"><%= @f_tvshow.tvshow.genre %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Writers:</td>
-        <td class="value"><%= @f_tvshow.tvshow.writer %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Actors:</td>
-        <td class="value"><%= @f_tvshow.tvshow.actors %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Plot:</td>
-        <td class="value"><%= @f_tvshow.tvshow.plot %></td>
-      </tr>
-      <tr>
-        <td class="attribute">IMDB:</td>
-        <td class="value"><%= @f_tvshow.tvshow.imdb_rating %></td>
-      </tr>
-      <tr>
-        <td class="attribute">Seasons:</td>
-        <td class="value"><%= @f_tvshow.tvshow.total_seasons %></td>
-      </tr>
-    </table>
+  <div class = "media-body" >
+    <table class = "tvshow-info" >
+      <tr >
+        <td class = "attribute" >Year:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.year %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Rated:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.rated %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Runtime:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.runtime %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Genre:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.genre %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Writers:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.writer %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Actors:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.actors %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Plot:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.plot %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >IMDB:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.imdb_rating %></td >
+      </tr >
+      <tr >
+        <td class = "attribute" >Seasons:</td >
+        <td class = "value" ><%= @f_tvshow.tvshow.total_seasons %></td >
+      </tr >
+    </table >
 
-    <a href= <%= unfollow_tvshow_path %> ><button type="button" class="btn btn-danger add-tvshow">Delete from
-      Watchlist<span class="glyphicon glyphicon-trash"></span></button></a>
-  </div>
-</div>
+    <a href = <%= unfollow_tvshow_path %> >
+      <button type = "button" class = "btn btn-danger add-tvshow" >Delete from
+        Watchlist<span class = "glyphicon glyphicon-trash" ></span ></button >
+    </a >
+  </div >
+</div >
 
 <% if @message %>
-    <div class="alert <%= @message.type %>" role="alert" style="margin-top: 15px"><%= @message.text %></div>
+    <div class = "alert <%= @message.type %>" role = "alert" style = "margin-top: 15px" ><%= @message.text %></div >
 <% end %>
 
-<div class="seasons-container">
+<div class = "seasons-container" >
   <% for season_nr in 1..@f_tvshow.tvshow.total_seasons %>
-      <div class="panel panel-info season" id="season<%= season_nr%>">
-        <div class="panel-heading">Season <%= season_nr %></div>
-        <table class="table">
-          <thead>
-          <tr>
-            <th>#</th>
-            <th class="title">Title</th>
-            <th>Released Date</th>
-            <th>Watched</th>
-          </tr>
-          </thead>
-          <tbody>
+      <div class = "panel panel-info season" id = "season<%= season_nr %>" >
+        <div class = "panel-heading" >Season <%= season_nr %></div >
+        <table class = "table" >
+          <thead >
+          <tr >
+            <th >#</th >
+            <th class = "title" >Title</th >
+            <th >Released Date</th >
+            <th >Watched</th >
+          </tr >
+          </thead >
+          <tbody >
           <% Episode.where(tvshow_id: @f_tvshow.tvshow.id, season: season_nr).sort.each do |episode| %>
-            <tr>
-              <td><%= episode.episode%></td>
-              <td class="title"><a href=<%= episode_details_path id: episode.id %> ><%= episode.title %></a></td>
-              <td><%= episode.released %></td>
-                <td>
+              <tr >
+                <td ><%= episode.episode %></td >
+                <td class = "title" ><a href = <%= episode_details_path id: episode.id %> ><%= episode.title %></a >
+                </td >
+                <td ><%= episode.released %></td >
+                <td >
                   <% if @f_tvshow.episodes.include?(episode) %>
-                    <form action=<%= unfollow_episode_path id: episode.id %>>
-                      <label>
-                        <input class=<%= 'cb'+season_nr.to_s%> type="checkbox" name="watched" onChange="this.form.submit()" checked>
-                      </label>
-                    </form>
+                      <form action =<%= unfollow_episode_path id: episode.id %>>
+                        <label >
+                          <input class = <%= 'cb'+season_nr.to_s %> type="checkbox" name = "watched" onChange = "this.form.submit()" checked >
+                        </label >
+                      </form >
                   <% else %>
-                    <form action=<%= follow_episode_path id: episode.id%>>
-                      <label>
-                        <input class=<%= 'cb'+season_nr.to_s%> type="checkbox" name="watched" onChange="this.form.submit()">
-                      </label>
-                    </form>
+                      <form action =<%= follow_episode_path id: episode.id %>>
+                        <label >
+                          <input class = <%= 'cb'+season_nr.to_s %> type="checkbox" name = "watched" onChange = "this.form.submit()" >
+                        </label >
+                      </form >
                   <% end %>
-                </td>
-            </tr>
+                </td >
+              </tr >
           <% end %>
-          <tr>
-            <td></td>
-            <td></td>
-            <td class="toggle-all">Toggle All</td>
-            <td>
-              <form action=<%= toggle_string ||= 'false'
-                               toggle_all_path(season_nr: season_nr, show_id: @f_tvshow.tvshow.id, t: toggle_string) %>>
-                <label>
-                  <input id=<%= 'toggle-switch' + season_nr.to_s %> type="checkbox" name="watched" onchange=
-                      "selectAll(<%=season_nr.to_s%>); this.form.submit()"
-                         <% if toggle_string == 'false'
-                              toggle_string = 'true' %> checked
-                         <% else
-                              toggle_string = 'false' %>
+          <tr >
+            <td ></td >
+            <td ></td >
+            <td class = "toggle-all" >Toggle All</td >
+            <td >
+              <form action =<%= toggle_all_path(season_nr: season_nr, show_id: @f_tvshow.tvshow.id) %>>
+                <label >
+                  <input id = <%= 'toggle-switch' + season_nr.to_s %> type="checkbox" name = "watched"
+                         onChange = "this.form.submit()"
+                         <% if Episode.where(tvshow_id: @f_tvshow.tvshow.id, season: season_nr).count == @f_tvshow.episodes.where(season: season_nr).count %>
+                         checked
                          <% end %>>
-                  <script type="text/javascript">
-                      function selectAll(i) {
-                          $('.cb' + i).each(function () {
-                              let value = $('#toggle-switch' + i).is(':checked');
-                              $(this).attr('checked', value);
-                          });
-                      }
-                  </script>
-                </label>
-              </form>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+                </label >
+              </form >
+            </td >
+          </tr >
+          </tbody >
+        </table >
+      </div >
   <% end %>
-  </div>
+</div >
