@@ -5,10 +5,6 @@ class TvshowManagerController < ApplicationController
   # return a view with a search bar and
   # TO DO: a list with the top rated tv shows by users
   def index
-    tvshow_list = ['tt2193021','tt3107288','tt1740299','tt4254242','tt3148266','tt0773262','tt0944947','tt0903747','tt0460649','tt1845307']
-    tvshow_list.each do |tvshowIMDB|
-      Tvshow.add_or_create(tvshowIMDB)
-    end
   end
 
   # return a view with a search bar and the
@@ -57,7 +53,7 @@ class TvshowManagerController < ApplicationController
   end
 
   def unfollow
-    tvshow = current_user.followed_tvshows.find_by(tvshow_id:params[:id])
+    tvshow = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
     tvshow.followed_episodes.each do |episode|
       episode.destroy
     end

@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe TvshowManagerController, type: :controller do
   fixtures :users, :tvshows
-  let(:matei) {users(:matei)}
-  let(:tvshow) {tvshows(:arrow)}
+  let(:matei) { users(:matei) }
+  let(:tvshow) { tvshows(:arrow) }
   before do
-    allow(controller).to receive(:current_user) {matei}
+    allow(controller).to receive(:current_user) { matei }
   end
   describe '#follow' do
-    subject {get :follow, params: { imdb_id: tvshow.imdb_id }}
+    subject { get :follow, params: { imdb_id: tvshow.imdb_id } }
     it 'should redirect to search' do
       expect(subject).to have_http_status(302)
       expect(subject).to redirect_to(action: 'search',
@@ -16,13 +16,13 @@ RSpec.describe TvshowManagerController, type: :controller do
                                      message_text: "#{ tvshow.title } was added successfully to your Watchlist",
                                      message_type: 'alert-success')
     end
-    it 'should add a new Tvshow to user',focus: true do
+    it 'should add a new Tvshow to user', focus: true do
       subject
       expect(matei.tvshows.count).to eq 1
     end
   end
   describe '#unfollow' do
-    subject {get :unfollow, params: {id: tvshow.id } }
+    subject { get :unfollow, params: { id: tvshow.id } }
     before do
       #Rails.application.load_seed
       matei.tvshows << tvshow
