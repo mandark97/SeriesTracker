@@ -25,4 +25,15 @@ RSpec.describe EpisodeManagerController, type: :controller do
       expect(matei.followed_tvshows.first.episodes.count).to eq 1
     end
   end
+  describe '#unfollow' do
+    before do
+      matei.tvshows << tvshow
+      matei.followed_tvshows.first.episodes << episode
+    end
+    subject {get :unfollow, params: { id: episode.id }}
+    it 'deletes the episode' do
+      subject
+      expect(matei.followed_tvshows.first.episodes.count).to eq 0
+    end
+  end
 end
