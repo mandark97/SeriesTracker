@@ -14,8 +14,9 @@ class EpisodeManagerController < ApplicationController
                                       message_type: 'alert-danger'
       return
     end
-    redirect_to tvshow_details_path id: episode.tvshow_id, anchor: "season#{ episode.season }"
+    redirect_to tvshow_details_path id: episode.tvshow_id, :anchor => "season#{ episode.season }"
   end
+
 
   # toggle all episodes from a season
   def toggle_all
@@ -35,7 +36,7 @@ class EpisodeManagerController < ApplicationController
         episodes << ep
       end
     end
-    redirect_to tvshow_details_path id: params[:show_id], anchor: "season#{ params[:season_nr] }"
+    redirect_to tvshow_details_path id: params[:show_id]
   end
 
   # marks an episode as unwatched and redirects them
@@ -59,10 +60,5 @@ class EpisodeManagerController < ApplicationController
 
   def episode_details
     @episode = Episode.find(params[:id])
-  end
-
-  private
-  def check_login
-    redirect_to root_path unless current_user
   end
 end
