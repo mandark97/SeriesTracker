@@ -6,7 +6,8 @@ AllCops:
   Exclude:
     - '**/templates/**/*'
     - '**/vendor/**/*'
-
+    - '**/db/schema.rb'
+    - '**/bundler_stubs/**/*'
 # Prefer &&/|| over and/or.
 Style/AndOr:
   Enabled: true

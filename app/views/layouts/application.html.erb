@@ -45,7 +45,7 @@
         <% if current_user %>
       Hi, <%= current_user.name %>
         <%else%>
-        Hi, UserName!
+        Hi, Guest!
         <%end%>
       </div>
     </div>
@@ -63,9 +63,15 @@
       </li>
       <!-- LINK TO MY ACCOUNT PAGE -->
       <li>
-        <a href="#">
-          <i class="glyphicon glyphicon-user"></i>
-          My Account</a>
+        <% if current_user == nil %>
+          <a href='auth/twitter'>
+            <i class="glyphicon glyphicon-user"></i>
+            Log in</a>
+        <% else %>
+           <a href=<%= signout_path %>>
+            <i class="glyphicon glyphicon-user"></i>
+            Log out</a>
+        <% end %>
       </li>
       <!-- LINK TO USER'S WATCHLIST -->
       <li>
