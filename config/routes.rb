@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
 
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+  resources :sessions, only: [:create, :destroy]
   resources :tweets
   # creates the following paths:
       # tweets ~ tweets#index
       # new_tweet ~ tweets#new
       # edit_tweet ~ tweets#edit
       # etc.
-
 
   root to: 'tvshow_manager#index'
   get 'tvshow_manager/search', as: 'search'
