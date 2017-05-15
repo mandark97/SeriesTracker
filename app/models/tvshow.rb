@@ -12,7 +12,7 @@ class Tvshow < ApplicationRecord
       for season_nr in 1..ret.total_seasons
         season = OMDB.client.id(ret.imdb_id, season: season_nr.to_s)
         season.episodes.each do |ep|
-          Episode.common_create(ep.imdb_id)
+          Episode.find_or_create(ep.imdb_id)
         end
       end
     end

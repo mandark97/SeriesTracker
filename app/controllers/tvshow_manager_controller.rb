@@ -36,12 +36,6 @@ class TvshowManagerController < ApplicationController
   # redirects them to the show_search_results view
   def follow
     tvshow = Tvshow.add_or_create(params[:imdb_id])
-    for season_nr in 1..tvshow.total_seasons
-      season = OMDB.client.id(tvshow.imdb_id, season: season_nr.to_s)
-      season.episodes.each do |ep|
-        Episode.find_or_create(ep.imdb_id)
-      end
-    end
 
     begin
       current_user.tvshows << tvshow
@@ -50,7 +44,6 @@ class TvshowManagerController < ApplicationController
                   title: tvshow.title,
                   message_text: "An error occured while adding #{ tvshow.title } to your Watchlist",
                   message_type: 'alert-danger'
-      return
     end
     redirect_to action: 'search',
                 title: tvshow.title,
@@ -96,7 +89,7 @@ class TvshowManagerController < ApplicationController
       if !episode.nil? #tvshow has new episode this week
         @watchlist.new_this_week << episode
       else #show last watched episode
-        f_episode = f_tvshow.followed_episodes.order(:created_at).last
+        f_episode = f_tvshow.followed_episodes.order(:episode_id).last#left for debate
 
         if f_episode.nil? # the user hasn't begin to watch the tvshow yet
           @watchlist.begin_watching << f_tvshow.tvshow
