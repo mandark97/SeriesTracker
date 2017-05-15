@@ -46,6 +46,12 @@
         <td class = "attribute" >Seasons:</td >
         <td class = "value" ><%= @f_tvshow.tvshow.total_seasons %></td >
       </tr >
+      <% unless @f_tvshow.rating.nil? %>
+          <tr>
+            <td class="attribute">My rating:</td>
+            <td class="value"><%= @f_tvshow.rating %></td>
+          </tr>
+      <% end %>
     </table >
 
     <a href = <%= unfollow_tvshow_path %> >
@@ -58,6 +64,31 @@
 <% if @message %>
     <div class = "alert <%= @message.type %>" role = "alert" style = "margin-top: 15px" ><%= @message.text %></div >
 <% end %>
+
+<div>
+  <% if @f_tvshow.rating.nil? %>
+      <%= form_tag('/tvshow_manager/add_rating', method: 'get') do %>
+          <label for="rating">Your rating:</label>
+          <%= collection_radio_buttons :rating, :options, [['Everyone I know must watch this'],
+                                                           ['Great show'],
+                                                           ['So and so'],
+                                                           ['Terrible'],
+                                                           ['What am I doing with my life?']],
+                                       :first, :last do |b| %>
+              <br><%= b.radio_button + b.label {''} %>
+              <%= b.label %>
+              <%= hidden_field_tag :id, @f_tvshow.tvshow.id %>
+          <% end %>
+          <br>
+          <%= submit_tag 'Add rating' %>
+      <% end %>
+  <% else %>
+      <%= form_tag('/tvshow_manager/remove_rating', method: 'get') do %>
+          <%= hidden_field_tag :id, @f_tvshow.tvshow.id %>
+          <%= submit_tag 'Delete rating' %>
+      <% end %>
+  <% end %>
+</div>
 
 <div class = "seasons-container" >
   <% for season_nr in 1..@f_tvshow.tvshow.total_seasons %>

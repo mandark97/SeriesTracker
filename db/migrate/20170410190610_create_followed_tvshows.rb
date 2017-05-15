@@ -4,6 +4,7 @@ class CreateFollowedTvshows < ActiveRecord::Migration[5.0]
       t.belongs_to :user, index: true, foreign_key: true
       t.belongs_to :tvshow, index: true, foreign_key: true
 
+      t.string :rating
       t.timestamps
     end
   end
