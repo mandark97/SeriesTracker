@@ -2,7 +2,14 @@ arrow:
   id: 1
   imdb_id: tt2193021
   title: Arrow
-  year: 2012
-  released: "2012-10-10"
-  imdb_rating: 7.9
   total_seasons: 6
+flash:
+    id: 2
+    imdb_id: tt3107288
+    title: The Flash
+    total_seasons: 4
+lucifer:
+    id: 3
+    imdb_id: tt4052886
+    title: Lucifer
+    total_seasons: 2

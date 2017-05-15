@@ -13,7 +13,8 @@ class Episode < ApplicationRecord
     episode
   end
 
-  def self.common_create(ep)
+  def self.common_create(imdb_id)
+    ep = OMDB.client.id(imdb_id)
     episode = Episode.new
     episode.tvshow_id = Tvshow.find_by(imdb_id: ep.series_id).id
     episode.imdb_id = ep[:imdb_id]
