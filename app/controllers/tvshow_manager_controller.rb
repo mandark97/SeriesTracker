@@ -62,7 +62,7 @@ class TvshowManagerController < ApplicationController
       tvshow.destroy
     rescue
       redirect_to action: 'watchlist',
-                  message_text: "An error occured while removing the show from your Watchlist",
+                  message_text: 'An error occured while removing the show from your Watchlist',
                   message_type: 'alert-danger'
       return
     end

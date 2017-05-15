@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe EpisodeManagerController, type: :controller do
   fixtures :users, :tvshows, :episodes
-  let(:matei) {users(:matei)}
-  let(:tvshow1) {tvshows(:arrow)}
-  let(:episode1) {episodes(:arrow1)}
+  let(:matei) { users(:matei) }
+  let(:tvshow1) { tvshows(:arrow) }
+  let(:episode1) { episodes(:arrow1) }
   before do
-    allow(controller).to receive(:current_user) {matei}
+    allow(controller).to receive(:current_user) { matei }
     matei.tvshows << tvshow1
   end
   describe '#follow' do
-    subject {get :follow, params: { id: episode1.id }}
+    subject { get :follow, params: { id: episode1.id } }
     it 'redirects to tvshow details' do
       expect(subject).to have_http_status(302)
       expect(subject).to redirect_to(controller: :tvshow_manager,
@@ -38,7 +38,7 @@ RSpec.describe EpisodeManagerController, type: :controller do
     before do
       matei.followed_tvshows.first.episodes << episode1
     end
-    subject {get :unfollow, params: { id: episode1.id }}
+    subject { get :unfollow, params: { id: episode1.id } }
     it 'redirects to tvshow details' do
       expect(subject).to have_http_status(302)
       expect(subject).to redirect_to(controller: :tvshow_manager,

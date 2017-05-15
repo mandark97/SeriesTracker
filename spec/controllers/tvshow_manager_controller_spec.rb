@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe TvshowManagerController, type: :controller do
   fixtures :users, :tvshows , :episodes
-  let(:matei) {users(:matei)}
-  let(:tvshow1) {tvshows(:arrow)}
+  let(:matei) { users(:matei) }
+  let(:tvshow1) { tvshows(:arrow) }
   before do
     allow(controller).to receive(:current_user) { matei }
   end
   describe '#follow' do
-    subject {get :follow, params: { imdb_id: tvshow1.imdb_id }}
+    subject { get :follow, params: { imdb_id: tvshow1.imdb_id } }
     it 'should redirect to search' do
       expect(subject).to have_http_status(302)
       expect(subject).to redirect_to(action: 'search',
@@ -32,7 +32,7 @@ RSpec.describe TvshowManagerController, type: :controller do
     end
   end
   describe '#unfollow' do
-    subject {get :unfollow, params: { id: tvshow1.id }}
+    subject { get :unfollow, params: { id: tvshow1.id } }
     before do
       #Rails.application.load_seed
       matei.tvshows << tvshow1
@@ -50,7 +50,7 @@ RSpec.describe TvshowManagerController, type: :controller do
       subject
       expect(subject).to have_http_status(302)
       expect(subject).to redirect_to(action: 'watchlist',
-                                     message_text: "An error occured while removing the show from your Watchlist",
+                                     message_text: 'An error occured while removing the show from your Watchlist',
                                      message_type: 'alert-danger')
     end
   end
