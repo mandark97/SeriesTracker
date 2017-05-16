@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514153338) do
+ActiveRecord::Schema.define(version: 20170516103356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20170514153338) do
     t.integer  "tvshow_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "rating"
     t.index ["tvshow_id"], name: "index_followed_tvshows_on_tvshow_id", using: :btree
     t.index ["user_id"], name: "index_followed_tvshows_on_user_id", using: :btree
   end
@@ -103,4 +104,8 @@ ActiveRecord::Schema.define(version: 20170514153338) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
+  add_foreign_key "followed_episodes", "episodes"
+  add_foreign_key "followed_episodes", "followed_tvshows"
+  add_foreign_key "followed_tvshows", "tvshows"
+  add_foreign_key "followed_tvshows", "users"
 end

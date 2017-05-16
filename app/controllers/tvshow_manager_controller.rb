@@ -117,4 +117,18 @@ class TvshowManagerController < ApplicationController
     end
     tvshow_list
   end
+
+  def add_rating
+    show = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
+    show.rating = params[:rating][:options]
+    show.save
+    redirect_to tvshow_details_path params[:id]
+  end
+
+  def remove_rating
+    show = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
+    show.rating = nil
+    show.save
+    redirect_to tvshow_details_path params[:id]
+  end
 end
