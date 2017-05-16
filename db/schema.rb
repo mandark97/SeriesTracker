@@ -104,4 +104,8 @@ ActiveRecord::Schema.define(version: 20170516103356) do
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 
+  add_foreign_key "followed_episodes", "episodes"
+  add_foreign_key "followed_episodes", "followed_tvshows"
+  add_foreign_key "followed_tvshows", "tvshows"
+  add_foreign_key "followed_tvshows", "users"
 end
