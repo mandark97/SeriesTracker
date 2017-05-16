@@ -131,4 +131,12 @@ class TvshowManagerController < ApplicationController
     show.save
     redirect_to tvshow_details_path params[:id]
   end
+
+  def mark_finished
+    tvshow = Tvshow.find(params[:id])
+    finished_tvshow = FinishedTvshow.new(tvshow: tvshow)
+    current_user.finished_tvshows << finished_tvshow
+
+    redirect_to :root
+  end
 end
