@@ -1,8 +1,12 @@
-$(".fa-bars" ).click(function() {
+//= require jquery3
+//= require jquery_ujs
+
+
+$(".glyphicon-menu-hamburger" ).click(function() {
     $(".sidebar-wrapper").show();
 });
 
-$(".fa-times" ).click(function() {
+$(".glyphicon-remove" ).click(function() {
     $(".sidebar-wrapper").hide();
 });
 

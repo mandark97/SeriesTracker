@@ -98,7 +98,7 @@ body {
   z-index: 1;
 }
 
-.header > i.fa-bars {
+.header > i.glyphicon-menu-hamburger {
   display: none;
   padding: 7px 0 0 10px;
   color: white;
@@ -115,7 +115,7 @@ body {
   text-align: center;
 }
 
-.sidebar-wrapper .sidebar-header i.fa-times {
+.sidebar-wrapper .sidebar-header i.glyphicon-remove {
   display: none;
   font-size: 2.2em;
   position: absolute;
@@ -147,11 +147,11 @@ body {
 
 /* for tables and phones hide the menu */
 @media (max-width: 991px) {
-  .header > i.fa-bars {
+  .header > i.glyphicon-menu-hamburger {
     display: inline;
   }
 
-  .sidebar-wrapper .sidebar-header i.fa-times{
+  .sidebar-wrapper .sidebar-header i.glyphicon-remove{
     display: inline;
   }
 

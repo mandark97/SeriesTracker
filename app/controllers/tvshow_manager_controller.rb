@@ -128,7 +128,7 @@ class TvshowManagerController < ApplicationController
       current_user.followed_tvshows.find_by(tvshow: tvshow).destroy
     rescue
       redirect_to watchlist_path message_text: 'An error occured while'\
-          ' removing the show from your Watchlist',
+          ' marking the show as finished',
           message_type: 'alert-danger'
       return
     end
