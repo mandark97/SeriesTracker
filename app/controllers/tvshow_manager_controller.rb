@@ -139,4 +139,8 @@ class TvshowManagerController < ApplicationController
 
     redirect_to :root
   end
+
+  def finished_tvshows
+    @finished_tvshows_list = current_user.finished_tvshows
+  end
 end
