@@ -2,9 +2,7 @@ class CreateFollowedTvshows < ActiveRecord::Migration[5.0]
   def change
     create_table :followed_tvshows do |t|
       t.belongs_to :user, index: true, foreign_key: true
-      t.belongs_to :tvshow, index: true, foreign_key: true
-
-      t.string :rating
+      t.belongs_to :tvshow, index: true, foreign_key: trues
       t.timestamps
     end
   end
