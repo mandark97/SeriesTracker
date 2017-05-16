@@ -1,34 +1,48 @@
 arrow1:
     id: 1
     tvshow_id: 1
-    imdb_id: tt5607526
-    title: Missing
-    released: 2017-05-17
-    episode: 22
-    imdb_rating: 0.0
-    created_at: 2017-05-13 20:20:33
-    updated_at: 2017-05-13 20:20:33
-    season: 5
-    director: Mairzee Almas
-    writer: Greg Berlanti (developed by) Marc Guggenheim (developed by) Andrew Kreisberg (developed by)
-    actors: Stephen Amell David Ramsey Willa Holland Emily Bett Rickards
-    plot: N/A
-    poster: https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ3OTc3OTg4MV5BMl5BanBnXkFtZTgwMjE5MTIxMDI@._V1_SX300.jpg
-    awards: N/A
+    imdb_id: tt2340185
+    title: Pilot
+    released: 2012-10-10
+    episode: 1
+    season: 1
 arrow2:
     id: 2
     tvshow_id: 1
-    imdb_id: tt5607524
+    imdb_id: tt2310910
     title: Honor Thy Fathers
-    released: 2017-05-10
-    episode: 21
-    imdb_rating: 0.0
-    created_at: 2017-05-13 20:20:33
-    updated_at: 2017-05-13 20:20:33
-    season: 5
-    director: Laura Belsey
-    writer: Greg Berlanti (developed by) Marc Guggenheim (developed by) Andrew Kreisberg (developed by) Marc Guggenheim Sarah Tarkoff
-    actors: Stephen Amell David Ramsey Willa Holland Emily Bett Rickards
-    plot: Oliver faces the forced release of criminals prosecuted by Adrian Chase while a crate is delivered to Oliver's office containing a corpse in concrete.
-    poster: https://images-na.ssl-images-amazon.com/images/M/MV5BMTQ3OTc3OTg4MV5BMl5BanBnXkFtZTgwMjE5MTIxMDI@._V1_SX300.jpg
-    awards: N/A
+    released: 2012-10-17
+    episode: 2
+    season: 1
+flash1:
+    id: 3
+    tvshow_id: 2
+    imdb_id: tt3187092
+    title: Pilot
+    released: 2014-10-07
+    episode: 1
+    season: 1
+flash2:
+    id: 4
+    tvshow_id: 2
+    imdb_id: tt3819518
+    title: Fastest Man Alive
+    released: 2014-10-14
+    episode: 2
+    season: 1
+lucifer1:
+    id: 5
+    tvshow_id: 3
+    imdb_id: tt4932378
+    title: Pilot
+    released: 2016-01-25
+    episode: 1
+    season: 1
+lucifer2:
+    id: 6
+    tvshow_id: 3
+    imdb_id: tt4952848
+    title: Lucifer Stay. Good Devil.
+    released: 2016-02-01
+    episode: 2
+    season: 1

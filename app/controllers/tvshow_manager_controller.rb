@@ -44,6 +44,7 @@ class TvshowManagerController < ApplicationController
                   title: tvshow.title,
                   message_text: "An error occured while adding #{ tvshow.title } to your Watchlist",
                   message_type: 'alert-danger'
+      return
     end
     redirect_to action: 'search',
                 title: tvshow.title,
@@ -54,10 +55,17 @@ class TvshowManagerController < ApplicationController
 
   def unfollow
     tvshow = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
-    tvshow.followed_episodes.each do |episode|
-      episode.destroy
+    begin
+      tvshow.followed_episodes.each do |episode|
+        episode.destroy
+      end
+      tvshow.destroy
+    rescue
+      redirect_to action: 'watchlist',
+                  message_text: 'An error occured while removing the show from your Watchlist',
+                  message_type: 'alert-danger'
+      return
     end
-    tvshow.destroy
     redirect_to watchlist_path
   end
 
@@ -74,29 +82,53 @@ class TvshowManagerController < ApplicationController
   end
 
   def watchlist
-    @watchlist = {
-        'new_this_week': [],
-        'last_episodes': [],
-        'begin_watching': []
-    }
-
     beginning_of_week = Time.current.utc.beginning_of_week
     end_of_week = Time.current.utc.end_of_week
+    return @watchlist = {
+        'new_this_week': new_episodes(beginning_of_week, end_of_week),
+        'last_episodes': f_tvshows_status.last_episodes,
+        'begin_watching': f_tvshows_status.begin_watching
+    }
+  end
 
+  def new_episodes(beginning_of_week, end_of_week)
+    new_ep = []
     current_user.followed_tvshows.each do |f_tvshow|
       episode = f_tvshow.tvshow.episodes.find_by(released: beginning_of_week..end_of_week)
 
       if !episode.nil? #tvshow has new episode this week
-        @watchlist.new_this_week << episode
-      else #show last watched episode
-        f_episode = f_tvshow.followed_episodes.order(:episode_id).last#left for debate
-
-        if f_episode.nil? # the user hasn't begin to watch the tvshow yet
-          @watchlist.begin_watching << f_tvshow.tvshow
-        else
-          @watchlist.last_episodes << f_episode.episode
-        end
+        new_ep << episode
       end
     end
+    new_ep
+  end
+
+  def f_tvshows_status
+    tvshow_list = {
+        'last_episodes': [],
+        'begin_watching': []
+    }
+    current_user.followed_tvshows.each do |f_tvshow|
+      if f_tvshow.followed_episodes.count == 0
+        tvshow_list.begin_watching << f_tvshow.tvshow
+      else
+        tvshow_list.last_episodes << f_tvshow.followed_episodes.order(:episode_id).last.episode
+      end
+    end
+    tvshow_list
+  end
+
+  def add_rating
+    show = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
+    show.rating = params[:rating][:options]
+    show.save
+    redirect_to tvshow_details_path params[:id]
+  end
+
+  def remove_rating
+    show = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
+    show.rating = nil
+    show.save
+    redirect_to tvshow_details_path params[:id]
   end
 end
