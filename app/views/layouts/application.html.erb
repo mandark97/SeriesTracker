@@ -92,6 +92,9 @@
 <!-- END NAVIGATION SIDEBAR -->
 <!-- PAGE CONTENT -->
 <main class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-content">
+  <% if @message %>
+      <div class="alert <%= @message.type %>" role="alert"><%= @message.text %></div>
+  <% end %>
 <%= yield %>
 </main>
 <!-- END PAGE CONTENT -->

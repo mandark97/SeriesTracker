@@ -5,10 +5,6 @@
   </span>
 </form>
 
-<% if @message %>
-    <div class="alert <%= @message.type %>" role="alert"><%= @message.text %></div>
-<% end %>
-
 <% @tvshows_list.each do |tvshow| %>
     <div class="media tvshow-details">
       <h2 class="tvshow-title"><%= tvshow.title%></h2>

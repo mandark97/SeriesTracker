@@ -66,10 +66,6 @@
   </div >
 </div >
 
-<% if @message %>
-    <div class = "alert <%= @message.type %>" role = "alert" style = "margin-top: 15px" ><%= @message.text %></div >
-<% end %>
-
 <div>
   <% if @f_tvshow.rating.nil? %>
       <%= form_tag('/tvshow_manager/add_rating', method: 'get') do %>
