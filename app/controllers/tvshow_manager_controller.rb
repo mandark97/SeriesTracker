@@ -134,7 +134,7 @@ class TvshowManagerController < ApplicationController
     finished_tvshow = FinishedTvshow.new(tvshow: tvshow)
     current_user.finished_tvshows << finished_tvshow
     current_user.followed_tvshows.find_by(tvshow: tvshow).destroy
-    redirect_to :root
+    redirect_to watchlist_path
   end
 
   def finished_tvshows

@@ -5,11 +5,13 @@
       <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
         <a href =<%= tvshow_details_path id: episode.tvshow.id %>>
           <div class = "thumbnail tvshow-card" >
+            <div class="poster-container">
             <% if episode.tvshow.poster == 'N/A' %>
                 <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
             <% else %>
                 <img class = "tvshow-poster" src = "<%= episode.tvshow.poster %>" alt = "tvshow-image" >
             <% end %>
+            </div>
             <div class = "caption" >
               <h4 class = "tvshow-title" ><%= episode.tvshow.title %> (<%= episode.tvshow.year %>)</h4 >
               <h4 class = "tvshow-title" >Season <%= episode.season %>  Episode <%= episode.episode %></h4 >
@@ -29,11 +31,13 @@
       <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
         <a href =<%= tvshow_details_path id: episode.tvshow.id %>>
           <div class = "thumbnail tvshow-card" >
+            <div class="poster-container">
             <% if episode.tvshow.poster == 'N/A' %>
                 <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
             <% else %>
                 <img class = "tvshow-poster" src = "<%= episode.tvshow.poster %>" alt = "tvshow-image" >
             <% end %>
+            </div>
             <div class = "caption" >
               <h4 class = "tvshow-title" ><%= episode.tvshow.title %> (<%= episode.tvshow.year %>)</h4 >
               <h4 class = "tvshow-title" >Season <%= episode.season %>  Episode <%= episode.episode %></h4 >
@@ -52,11 +56,13 @@
       <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
         <a href =<%= tvshow_details_path id: tvshow.id %>>
           <div class = "thumbnail tvshow-card" >
+            <div class="poster-container">
             <% if tvshow.poster == 'N/A' %>
                 <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
             <% else %>
                 <img class = "tvshow-poster" src = "<%= tvshow.poster %>" alt = "tvshow-image" >
             <% end %>
+            </div>
             <div class = "caption" >
               <h4 class = "tvshow-title" ><%= tvshow.title %> (<%= tvshow.year %>)</h4 >
             </div >
