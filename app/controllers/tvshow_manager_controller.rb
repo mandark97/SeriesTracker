@@ -54,12 +54,9 @@ class TvshowManagerController < ApplicationController
   end
 
   def unfollow
-    tvshow = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
+    followed_tvshow = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
     begin
-      tvshow.followed_episodes.each do |episode|
-        episode.destroy
-      end
-      tvshow.destroy
+      followed_tvshow.destroy
     rescue
       redirect_to action: 'watchlist',
                   message_text: 'An error occured while removing the show from your Watchlist',
@@ -136,7 +133,7 @@ class TvshowManagerController < ApplicationController
     tvshow = Tvshow.find(params[:id])
     finished_tvshow = FinishedTvshow.new(tvshow: tvshow)
     current_user.finished_tvshows << finished_tvshow
-
+    current_user.followed_tvshows.find_by(tvshow: tvshow).destroy
     redirect_to :root
   end
 
