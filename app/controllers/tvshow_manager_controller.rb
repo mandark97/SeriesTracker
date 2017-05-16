@@ -36,14 +36,14 @@ class TvshowManagerController < ApplicationController
       current_user.tvshows << tvshow
     rescue
       redirect_to search_path title: tvshow.title,
-                  message_text: "An error occured while adding "\
+                  message_text: 'An error occured while adding '\
                     "#{ tvshow.title } to your Watchlist",
                   message_type: 'alert-danger'
       return
     end
     redirect_to search_path title: tvshow.title,
                 message_text: "#{ tvshow.title } was added "\
-                  "successfully to your Watchlist",
+                  'successfully to your Watchlist',
                 message_type: 'alert-success'
 
   end
@@ -140,12 +140,12 @@ class TvshowManagerController < ApplicationController
   end
 
   private
-  def show_messages
-    if params[:message_text]
-      @message = {
-          'text': params[:message_text],
-          'type': params[:message_type]
-      }
+    def show_messages
+      if params[:message_text]
+        @message = {
+            'text': params[:message_text],
+            'type': params[:message_type]
+        }
+      end
     end
-  end
 end
