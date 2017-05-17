@@ -1,7 +1,7 @@
 <div class="row">
   <% @finished_tvshows_list.each do |f_tvshow| %>
       <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
-        <div class = "thumbnail tvshow-card" >
+        <div class = "thumbnail tvshow-card finished-tvshow" >
           <div class="poster-container">
           <% if f_tvshow.tvshow.poster == 'N/A' %>
               <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
@@ -12,7 +12,10 @@
           <div class = "caption" >
             <h4 class = "tvshow-title" ><%= f_tvshow.tvshow.title %> (<%= f_tvshow.tvshow.year %>)</h4 >
           </div >
+          <a class="delete-finished-tvshow" href=<%= delete_finished_tvshow_path id: f_tvshow%>>
+            <button class="btn btn-danger large-button">Delete</button>
+          </a>
         </div >
       </div >
-  <% end %>
+<% end %>
 </div>

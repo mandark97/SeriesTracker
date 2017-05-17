@@ -32,6 +32,15 @@ class TvshowManagerController < ApplicationController
   def follow
     tvshow = Tvshow.add_or_create(params[:imdb_id])
 
+    if current_user.finished_tvshows.find_by(tvshow: tvshow)
+      redirect_to search_path title: tvshow.title,
+                              message_text: "#{ tvshow.title } is"\
+' in your FinishedTvShows, please remove it before you'\
+' proceed with this action',
+                              message_type: 'alert-danger'
+      return
+    end
+
     begin
       current_user.tvshows << tvshow
     rescue
@@ -136,6 +145,19 @@ class TvshowManagerController < ApplicationController
 
   def finished_tvshows
     @finished_tvshows_list = current_user.finished_tvshows
+  end
+
+  def delete_finished_tvshow
+    begin
+      finished_tvshow = current_user.finished_tvshows.find(params[:id])
+      finished_tvshow.destroy
+    rescue
+      redirect_to finished_tvshows_path message_text: 'An error occured '\
+                   'while removing the show from your FinishedTVShows',
+                                 message_type: 'alert-danger'
+      return
+    end
+    redirect_to finished_tvshows_path
   end
 
   private
