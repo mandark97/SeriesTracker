@@ -108,7 +108,7 @@ class TvshowManagerController < ApplicationController
 
   def add_rating
     show = current_user.followed_tvshows.find_by(tvshow_id: params[:id])
-    if params[:rating] == "nil"
+    if params[:rating] == 'nil'
       show.rating = nil
     else
       show.rating = params[:rating]
