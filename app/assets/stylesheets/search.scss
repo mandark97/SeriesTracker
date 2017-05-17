@@ -7,6 +7,10 @@ form.search-bar {
   width: 100%;
 }
 
+.tvshow-details table.tvshow-info {
+  margin-bottom: 10px;
+}
+
 .tvshow-details table.tvshow-info td {
   padding: 5px;
 }
@@ -40,13 +44,13 @@ form.search-bar {
 
 }
 
-.tvshow-details button.add-tvshow {
+.tvshow-details button.large-button {
   float:right;
   margin-right: 10px;
   font-size: 1.3em;
 }
 
-.tvshow-details button.add-tvshow > span {
+.tvshow-details button.large-button > span {
   padding-left: 5px;
 }
 

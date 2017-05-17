@@ -55,15 +55,16 @@
     </table >
 
     <a href = <%= unfollow_tvshow_path %> >
-      <button type = "button" class = "btn btn-danger add-tvshow" >Delete from
+      <button type = "button" class = "btn btn-danger large-button" >Delete from
         Watchlist<span class = "glyphicon glyphicon-trash" ></span ></button >
+    </a >
+
+    <a href = <%= mark_finished_path %> >
+      <button type = "button" class = "btn btn-info large-button pull-left" >Mark as finished
+        <span class = "glyphicon glyphicon-ok" ></span ></button >
     </a >
   </div >
 </div >
-
-<% if @message %>
-    <div class = "alert <%= @message.type %>" role = "alert" style = "margin-top: 15px" ><%= @message.text %></div >
-<% end %>
 
 <div>
   <% if @f_tvshow.rating.nil? %>

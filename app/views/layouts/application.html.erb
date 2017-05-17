@@ -5,8 +5,6 @@
   <%= csrf_meta_tags %>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- bootstrap css -->
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!-- google fonts -->
   <link href="https://fonts.googleapis.com/css?family=Arimo|Arvo|Lato|Lobster" rel="stylesheet">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -15,7 +13,7 @@
 <body>
 <!-- HEADER -->
 <header class="col-lg-12 col-md-12 col-sm-12 col-xs-12 header">
-  <i class="fa fa-bars"></i>
+  <i class="glyphicon glyphicon-menu-hamburger"></i>
 </header>
 <!-- END HEADER -->
 
@@ -23,7 +21,7 @@
 <div class="sidebar-wrapper col-lg-3 col-md-3 col-sm-12 col-xs-12">
   <div class="sidebar-header">
     <span class="title">Series Tracker</span>
-    <i class="fa fa-times fa-2x"></i>
+    <i class="glyphicon glyphicon-remove"></i>
   </div>
   <!-- USER PROFILE -->
   <div>
@@ -81,7 +79,7 @@
       </li>
       <!-- LINK TO USER'S FINISHED TVSHOWS -->
       <li>
-        <a href="#">
+        <a href=<%= finished_tvshows_path %>>
           <i class="glyphicon glyphicon-ok"></i>
           Finished TVshows </a>
       </li>
@@ -92,17 +90,14 @@
 <!-- END NAVIGATION SIDEBAR -->
 <!-- PAGE CONTENT -->
 <main class="col-lg-9 col-md-9 col-sm-12 col-xs-12 main-content">
+  <% if @message %>
+      <div class="alert <%= @message.type %>" role="alert"><%= @message.text %></div>
+  <% end %>
 <%= yield %>
 </main>
 <!-- END PAGE CONTENT -->
 
 <!-- SCRIPTS -->
-<!-- jquery-->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="crossorigin="anonymous"></script>
-<!-- js bootstrap -->
-<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!-- font awesome -->
-<script src="https://use.fontawesome.com/7bb929f83a.js"></script>
 <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 <!-- END SCRIPTS ->
 
