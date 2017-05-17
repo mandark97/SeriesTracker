@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'tvshow_manager/add_rating/:id', to: 'tvshow_manager#add_rating', as: 'rate_tvshow'
   get 'tvshow_manager/mark_finished/:id', to: 'tvshow_manager#mark_finished', as: 'mark_finished'
   get 'tvshow_manager/finished_tvshows', as: 'finished_tvshows'
+  get 'tvshow_manager/finished_tvshows/delete/:id', to: 'tvshow_manager#delete_finished_tvshow', as: 'delete_finished_tvshow'
 
   post 'episode_manager/new', as: 'new_episode'
   get 'episode_manager/follow/:id', to: 'episode_manager#follow', as: 'follow_episode'

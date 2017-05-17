@@ -1,0 +1,21 @@
+.finished-tvshow:hover img {
+  opacity: 0.5;
+}
+
+.finished-tvshow {
+  position: relative;
+}
+
+a.delete-finished-tvshow {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Arvo', serif;
+  text-decoration: none;
+}
+
+.finished-tvshow:hover a.delete-finished-tvshow {
+  display: inline;
+}
