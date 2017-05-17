@@ -9,8 +9,7 @@ Rails.application.routes.draw do
   get 'tvshow_manager/unfollow/:id', to: 'tvshow_manager#unfollow', as: 'unfollow_tvshow'
   get 'tvshow_manager/watchlist', as: 'watchlist'
   get 'tvshow_manager/tvshow/:id', to: 'tvshow_manager#tvshow_details', as: 'tvshow_details'
-  get 'tvshow_manager/add_rating', to: 'tvshow_manager#add_rating'
-  get 'tvshow_manager/remove_rating', to: 'tvshow_manager#remove_rating'
+  get 'tvshow_manager/add_rating/:id', to: 'tvshow_manager#add_rating', as: 'rate_tvshow'
   get 'tvshow_manager/mark_finished/:id', to: 'tvshow_manager#mark_finished', as: 'mark_finished'
   get 'tvshow_manager/finished_tvshows', as: 'finished_tvshows'
 

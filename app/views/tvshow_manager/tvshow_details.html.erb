@@ -46,12 +46,28 @@
         <td class = "attribute" >Seasons:</td >
         <td class = "value" ><%= @f_tvshow.tvshow.total_seasons %></td >
       </tr >
-      <% unless @f_tvshow.rating.nil? %>
-          <tr>
-            <td class="attribute">My rating:</td>
-            <td class="value"><%= @f_tvshow.rating %></td>
-          </tr>
-      <% end %>
+        <tr>
+          <td class="attribute">My rating:</td>
+          <td class="value">
+            <form action=<%= rate_tvshow_path id: @f_tvshow.tvshow.id %>>
+              <label for="rating">
+                <select class="form-control" name="rating" onchange="this.form.submit()">
+                  <% if @f_tvshow.rating %>
+                      <option hidden selected><%= @f_tvshow.rating %></option>
+                  <% else %>
+                      <option hidden selected>Not rated</option>
+                <% end %>
+                  <option value="nil">Not rated</option>
+                  <option value="Everyone I know must watch this">Everyone I know must watch this</option>
+                  <option value="Great show">Great show</option>
+                  <option value="So and so">So and so</option>
+                  <option value="Terrible">Terrible</option>
+                  <option value="What am I doing with my life?">What am I doing with my life? </option>
+                </select>
+              </label>
+            </form>
+          </td>
+        </tr>
     </table >
 
     <a href = <%= unfollow_tvshow_path %> >
@@ -65,31 +81,6 @@
     </a >
   </div >
 </div >
-
-<div>
-  <% if @f_tvshow.rating.nil? %>
-      <%= form_tag('/tvshow_manager/add_rating', method: 'get') do %>
-          <label for="rating">Your rating:</label>
-          <%= collection_radio_buttons :rating, :options, [['Everyone I know must watch this'],
-                                                           ['Great show'],
-                                                           ['So and so'],
-                                                           ['Terrible'],
-                                                           ['What am I doing with my life?']],
-                                       :first, :last do |b| %>
-              <br><%= b.radio_button + b.label {''} %>
-              <%= b.label %>
-              <%= hidden_field_tag :id, @f_tvshow.tvshow.id %>
-          <% end %>
-          <br>
-          <%= submit_tag 'Add rating' %>
-      <% end %>
-  <% else %>
-      <%= form_tag('/tvshow_manager/remove_rating', method: 'get') do %>
-          <%= hidden_field_tag :id, @f_tvshow.tvshow.id %>
-          <%= submit_tag 'Delete rating' %>
-      <% end %>
-  <% end %>
-</div>
 
 <div class = "seasons-container" >
   <% for season_nr in 1..@f_tvshow.tvshow.total_seasons %>
