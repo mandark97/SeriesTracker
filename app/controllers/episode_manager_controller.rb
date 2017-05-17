@@ -54,7 +54,7 @@ class EpisodeManagerController < ApplicationController
         episodes << ep
       end
     end
-    redirect_to tvshow_details_path id: params[:show_id]
+    redirect_to tvshow_details_path id: params[:show_id], anchor: "season#{ params[:season_nr] }"
   end
 
   def episode_details

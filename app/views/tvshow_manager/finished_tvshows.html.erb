@@ -1,0 +1,18 @@
+<div class="row">
+  <% @finished_tvshows_list.each do |f_tvshow| %>
+      <div class = "col-lg-3 col-md-4 col-sm-6 col-xs-12 tvshow-card-container" >
+        <div class = "thumbnail tvshow-card" >
+          <div class="poster-container">
+          <% if f_tvshow.tvshow.poster == 'N/A' %>
+              <img class = "tvshow-poster" src = "<%= image_path('default-poster.png') %>" alt = "tvshow-image" >
+          <% else %>
+              <img class = "tvshow-poster" src = "<%= f_tvshow.tvshow.poster %>" alt = "tvshow-image" >
+          <% end %>
+          </div>
+          <div class = "caption" >
+            <h4 class = "tvshow-title" ><%= f_tvshow.tvshow.title %> (<%= f_tvshow.tvshow.year %>)</h4 >
+          </div >
+        </div >
+      </div >
+  <% end %>
+</div>
