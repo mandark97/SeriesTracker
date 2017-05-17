@@ -69,7 +69,8 @@ RSpec.describe EpisodeManagerController, type: :controller do
       expect(subject).to have_http_status(302)
       expect(subject).to redirect_to(controller: :tvshow_manager,
                                      action: :tvshow_details,
-                                     id: tvshow1.id)
+                                     id: tvshow1.id,
+                                     anchor: 'season1')
     end
     it 'adds episodes to followed episodes' do
       subject
