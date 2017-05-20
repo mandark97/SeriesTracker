@@ -87,6 +87,7 @@ module OMDB
       params[:episode] = options[:episode] if options[:episode]
       params[:type] = options[:type] if options[:type]
       params[:tomatoes] = options[:tomatoes] if options[:tomatoes]
+      params[:apikey] = ENV['OMDB_API_KEY']
       params
     end
 

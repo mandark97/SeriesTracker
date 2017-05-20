@@ -63,10 +63,12 @@ RSpec.describe TvshowManagerController, type: :controller do
   #     matei.tvshows << tvshow1
   #     matei.followed_tvshows.find_by(tvshow: tvshow1.id).episodes <<  episode1
   #     matei.tvshows << tvshow2
+  #     TvshowManagerController.instance_variable_get(:watchlist)
   #   end
   #   subject { get :watchlist }
   #   it 'shows episodes that will appear this week' do
-  #     subject
+  #     result = subject
+  #     expect(result).to
   #   end
   # end
 end

@@ -115,8 +115,4 @@ ActiveRecord::Schema.define(version: 20170516190536) do
 
   add_foreign_key "finished_tvshows", "tvshows"
   add_foreign_key "finished_tvshows", "users"
-  add_foreign_key "followed_episodes", "episodes"
-  add_foreign_key "followed_episodes", "followed_tvshows"
-  add_foreign_key "followed_tvshows", "tvshows"
-  add_foreign_key "followed_tvshows", "users"
 end
